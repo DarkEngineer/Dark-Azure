@@ -38,6 +38,7 @@ rotation = 1.5708
 shape = SubResource( 2 )
 
 [node name="Highlight" type="Sprite" parent="."]
+visible = false
 position = Vector2( -4.76837e-07, 4.76837e-07 )
 scale = Vector2( 0.12817, 0.12817 )
 texture = ExtResource( 3 )
