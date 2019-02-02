@@ -12,7 +12,7 @@ var _current_velocity = Vector2(0.0, 0.0)
 var _prev_velocity = Vector2(0, 0)
 var _wander_angle = 0.0
 var _ANGLE_MAX = 10
-var _arrival_radius = 20.0
+var _arrival_radius = 50.0
 var _rotation_speed = 5.0 # 5 degrees/s
 
 
@@ -37,12 +37,12 @@ func distance_to(position):
 ###########################################################################
 func seek(pos, target, velocity) -> Vector2:
 	var desired_velocity = target - pos 
-	var steering = desired_velocity.normalized() - velocity
+	var steering = desired_velocity - velocity
 	return steering
 
 func flee(pos, target, velocity):
 	var desired_velocity = pos - target
-	var steering = desired_velocity.normalized() - velocity
+	var steering = desired_velocity - velocity
 	return steering
 
 func arrival(pos, target, velocity, c_speed, radius):
@@ -83,14 +83,8 @@ func evade(pos, pos_target, velocity, target_velocity, max_target_speed):
 	var future_position = pos_target + target_velocity * update_ahead
 	return flee(pos, future_position, velocity)
 
-# ROTATION FUNCTIONS
-###########################################################################
-func rotate_ship(movement_vector):
-	var t_vector = Vector2(1, 0)
-	t_vector = t_vector.rotated(get_rotation())
-	var m_vector = movement_vector.normalized()
-	var rel_angle = m_vector.angle_to(t_vector)
-	return rel_angle
+
+
 ###########################################################################
 func _on_move_to_target(target):
 	_target = target["global"]
