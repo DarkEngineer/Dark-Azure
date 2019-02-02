@@ -13,8 +13,8 @@ var _prev_velocity = Vector2(0, 0)
 var _wander_angle = 0.0
 var _ANGLE_MAX = 10
 var _arrival_radius = 50.0
-var _rotation_speed = 5.0 # 5 degrees/s
-
+var _rotation_speed = deg2rad(15.0) # 15 degrees/s
+var _prev_rel_angle = 0.0
 
 func _ready() -> void:
 	connect("highlight", self, "_on_Ship_highlight")
@@ -35,6 +35,18 @@ func distance_to(position):
 
 # MOVEMENT FUNCTIONS
 ###########################################################################
+func project_ship_vectors(vector):
+	var forward_vector = Vector2(1, 0)
+	forward_vector = forward_vector.rotated(get_rotation())
+	var rotation_vector = forward_vector.rotated(deg2rad(90.0))
+	forward_vector = vector.project(forward_vector)
+	rotation_vector = vector.project(rotation_vector)
+	var ship_vectors = {
+		"forward": forward_vector,
+		"rotation": rotation_vector
+	}
+	return ship_vectors
+
 func seek(pos, target, velocity) -> Vector2:
 	var desired_velocity = target - pos 
 	var steering = desired_velocity - velocity
@@ -82,8 +94,6 @@ func evade(pos, pos_target, velocity, target_velocity, max_target_speed):
 	var update_ahead = distance. length() / max_target_speed
 	var future_position = pos_target + target_velocity * update_ahead
 	return flee(pos, future_position, velocity)
-
-
 
 ###########################################################################
 func _on_move_to_target(target):
