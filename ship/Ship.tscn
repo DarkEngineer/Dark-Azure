@@ -1,14 +1,13 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ship/Ship.gd" type="Script" id=1]
-[ext_resource path="res://PID_Controller/PID_Controller.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/ship/ship_1.png" type="Texture" id=3]
-[ext_resource path="res://assets/galaxy_ui/node_owned.png" type="Texture" id=4]
-[ext_resource path="res://ship/ShipStateMachine.gd" type="Script" id=5]
-[ext_resource path="res://ship/states/movement/Idle.gd" type="Script" id=6]
-[ext_resource path="res://ship/states/movement/Move.gd" type="Script" id=7]
-[ext_resource path="res://ship/states/movement/Patrol.gd" type="Script" id=8]
-[ext_resource path="res://ship/states/combat/Attack.gd" type="Script" id=9]
+[ext_resource path="res://assets/ship/ship_1.png" type="Texture" id=2]
+[ext_resource path="res://assets/galaxy_ui/node_owned.png" type="Texture" id=3]
+[ext_resource path="res://ship/ShipStateMachine.gd" type="Script" id=4]
+[ext_resource path="res://ship/states/movement/Idle.gd" type="Script" id=5]
+[ext_resource path="res://ship/states/movement/Move.gd" type="Script" id=6]
+[ext_resource path="res://ship/states/movement/Patrol.gd" type="Script" id=7]
+[ext_resource path="res://ship/states/combat/Attack.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=2]
 
@@ -17,7 +16,7 @@ extents = Vector2( 14.7069, 28.9409 )
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": false,
 "name": "default",
 "speed": 5.0
@@ -29,8 +28,6 @@ animations = [ {
 input_pickable = true
 collision_mask = 2
 script = ExtResource( 1 )
-
-[node name="SpeedPIDController" parent="." instance=ExtResource( 2 )]
 
 [node name="Shape" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -45,20 +42,20 @@ frames = SubResource( 1 )
 visible = false
 position = Vector2( -4.76837e-07, 4.76837e-07 )
 scale = Vector2( 0.12817, 0.12817 )
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 4 )
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 
 [node name="Move" type="Node" parent="StateMachine"]
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 
 [node name="Patrol" type="Node" parent="StateMachine"]
-script = ExtResource( 8 )
+script = ExtResource( 7 )
 
 [node name="Attack" type="Node" parent="StateMachine"]
-script = ExtResource( 9 )
+script = ExtResource( 8 )
 

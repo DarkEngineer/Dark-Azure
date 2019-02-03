@@ -6,34 +6,19 @@ signal move(target)
 signal patrol()
 signal attack(target)
 
-#SPEED PID CONTROL SIGNALS
-signal start_speed_calculation()
-signal stop_speed_calculation()
-
 var _target = null
 var _wander_angle: float = 0.0
 var _ANGLE_MAX: int = 10
 export var _max_speed: float = 40.0
-export var _current_speed: float = 0.0 # process variable for PID
-export var _setpoint_speed: float = 0.0 # set point for PID
-export var _thrust_vector: Vector2 = Vector2(0, 0)
+export var _current_speed: float = 0.0 
 
-var _inertia = {
-	"K": [0.2],
-	"T": [0.3],
-	"u_t": [0.0],
-	"y_t": [0.0],
-	"dy": [0.0, 0.0]
-}
+export var _thrust_vector: Vector2 = Vector2(0, 0)
 
 func _ready() -> void:
 	connect("highlight", self, "_on_Ship_highlight")
 	connect("move", self, "_on_move_to_target")
 	connect("patrol", self, "_on_patrol_system")
 	connect("attack", self, "_on_attack")
-	connect("start_speed_calculation", $SpeedPIDController, "_on_start_timer")
-	connect("start_stop_calculation", $SpeedPIDController, "_on_stop_timer")
-	get_speed_pid().get_timer().connect("timeout", self, "_on_speed_timeout")
 
 func _draw():
 	if _target != null:
@@ -47,18 +32,6 @@ func _on_Ship_highlight():
 func deselect():
 	$Highlight.hide()
 
-func get_speed_pid():
-	return $SpeedPIDController
-
-# SHIP INERTIA
-func calculate_inertia(u_t):
-	_inertia.u_t[0] = u_t
-	var y_t = _inertia["K"][0] * _inertia["u_t"][0]
-	y_t -= get_speed_pid()._dt / _inertia.T[0] * (_inertia.dy[0] - _inertia.dy[1])
-	_inertia.y_t[0] = y_t
-	_inertia.dy[1] = _inertia.dy[0]
-	_inertia.dy[0] = _inertia.y_t[0]
-	return y_t
 
 # MOVEMENT FUNCTIONS
 ###########################################################################
@@ -114,7 +87,6 @@ func evade(pos, pos_target, velocity, target_velocity, max_target_speed):
 func _on_move_to_target(target):
 	_target = target["global"]
 	$StateMachine._change_state("move")
-	emit_signal("start_speed_calculation")
 
 func _on_patrol_system():
 	$StateMachine._change_state("patrol")
@@ -122,8 +94,3 @@ func _on_patrol_system():
 func _on_attack(target):
 	_target = target
 	$StateMachine._change_state("attack")
-
-func _on_speed_timeout():
-	var u_t = get_speed_pid().calculate(_setpoint_speed, _current_speed)
-	_current_speed = calculate_inertia(u_t)
-	print(_current_speed)
