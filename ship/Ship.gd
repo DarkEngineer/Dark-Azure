@@ -9,8 +9,11 @@ signal attack(target)
 var _target = null
 var _wander_angle: float = 0.0
 var _ANGLE_MAX: int = 10
-export var _max_speed: float = 40.0
-export var _current_speed: float = 0.0 
+export var _current_speed: float = 0.0
+var _max_speed: float = 40.0
+var _max_thrust_force = 15
+var _max_steering_force = 8
+var _max_rotation_speed = 10 # 10 degrees/s
 
 export var _thrust_vector: Vector2 = Vector2(0, 0)
 
@@ -32,6 +35,13 @@ func _on_Ship_highlight():
 func deselect():
 	$Highlight.hide()
 
+func generate_thrust_force(steering_force):
+	var ship_rotation = $Shape.get_rotation()
+	var thrust_vector = Vector2(1, 0)
+	thrust_vector = thrust_vector.rotated(ship_rotation)
+	var thrust_projection = steering_force.project(thrust_vector)
+	prints(thrust_projection, thrust_vector)
+	
 
 # MOVEMENT FUNCTIONS
 ###########################################################################
