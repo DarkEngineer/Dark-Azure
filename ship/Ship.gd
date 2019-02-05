@@ -11,9 +11,9 @@ var _wander_angle: float = 0.0
 var _ANGLE_MAX: int = 10
 export var _current_speed: float = 0.0
 var _max_speed: float = 40.0
-var _max_thrust_force = 15
-var _max_steering_force = 8
-var _max_rotation_speed = 10 # 10 degrees/s
+var _max_thrust_force: float = 4
+var _max_steering_force: float = 8
+var _max_rotation_speed: float = 10 # 10 degrees/s
 
 export var _thrust_vector: Vector2 = Vector2(0, 0)
 
