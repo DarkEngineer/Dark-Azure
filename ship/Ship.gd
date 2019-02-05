@@ -35,13 +35,23 @@ func _on_Ship_highlight():
 func deselect():
 	$Highlight.hide()
 
+#project steering to thrust force vector
 func generate_thrust_force(steering_force):
 	var ship_rotation = $Shape.get_rotation()
 	var thrust_vector = Vector2(1, 0)
 	thrust_vector = thrust_vector.rotated(ship_rotation)
 	var thrust_projection = steering_force.project(thrust_vector)
-	prints(thrust_projection, thrust_vector)
-	
+	if thrust_projection.normalized().dot(thrust_vector) == -1:
+		thrust_projection = Vector2(0, 0)
+	return thrust_projection
+
+#project steering to rotation force vector
+func generate_rotation_force(steering_force):
+	var ship_rotation = $Shape.get_rotation()
+	var rotation_force = Vector2(0, 1)
+	rotation_force = rotation_force.rotated(ship_rotation)
+	var rotation_projection = steering_force.project(rotation_force)
+	return rotation_projection
 
 # MOVEMENT FUNCTIONS
 ###########################################################################
