@@ -18,6 +18,8 @@ func _change_state(state_name):
 		return
 	if current_state == states_map["patrol"] and state_name in ["move"]:
 		states_stack.pop_front()
+	if current_state == states_map["attack"]:
+		states_stack.pop_front()
 	._change_state(state_name)
 
 func _input(event):

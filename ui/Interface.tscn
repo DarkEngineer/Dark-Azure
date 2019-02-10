@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/Interface.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/Orbitron/Orbitron-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://edit_icon10x10.svg" type="Texture" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 15
+outline_size = 1
+outline_color = Color( 0.0470588, 0.00784314, 0.00784314, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
 
 [node name="Interface" type="Control"]
 anchor_right = 1.0
@@ -9,13 +20,10 @@ mouse_filter = 2
 script = ExtResource( 1 )
 
 [node name="PlanetPanel" type="Panel" parent="."]
-editor/display_folded = true
-visible = false
-margin_right = 502.0
-margin_bottom = 302.0
+margin_right = 282.0
+margin_bottom = 259.0
 
 [node name="TabContainer" type="TabContainer" parent="PlanetPanel"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -27,35 +35,86 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="ItemList" type="ItemList" parent="PlanetPanel/TabContainer/Details"]
+[node name="MarginContainer" type="MarginContainer" parent="PlanetPanel/TabContainer/Details"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 209.0
+margin_right = -5.0
+margin_bottom = -163.0
 
-[node name="Structures" type="Tabs" parent="PlanetPanel/TabContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
+[node name="ColorRect" type="ColorRect" parent="PlanetPanel/TabContainer/Details/MarginContainer"]
+margin_right = 60.0
+margin_bottom = 60.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlanetPanel/TabContainer/Details"]
+margin_right = 113.0
+margin_bottom = 20.0
+
+[node name="PlanetName" type="Label" parent="PlanetPanel/TabContainer/Details/HBoxContainer"]
+margin_top = 2.0
+margin_right = 87.0
+margin_bottom = 18.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.960784, 0.992157, 0.0235294, 1 )
+text = "Coruscant"
+
+[node name="Container" type="Container" parent="PlanetPanel/TabContainer/Details/HBoxContainer"]
+margin_left = 91.0
+margin_right = 91.0
+margin_bottom = 20.0
+
+[node name="EditButton" type="Button" parent="PlanetPanel/TabContainer/Details/HBoxContainer/Container"]
+icon = ExtResource( 3 )
+align = 2
+
+[node name="GridContainer" type="GridContainer" parent="PlanetPanel/TabContainer/Details"]
+margin_left = 5.0
+margin_top = 33.0
+margin_right = 194.0
+margin_bottom = 196.0
+columns = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PlanetPanel/TabContainer/Details/GridContainer"]
+editor/display_folded = true
+margin_right = 83.0
+margin_bottom = 28.0
+
+[node name="SystemL" type="Label" parent="PlanetPanel/TabContainer/Details/GridContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 76.0
+margin_bottom = 21.0
+text = "System"
+align = 1
+valign = 1
+
+[node name="System" type="Label" parent="PlanetPanel/TabContainer/Details/GridContainer"]
+margin_left = 87.0
+margin_top = 7.0
+margin_right = 165.0
+margin_bottom = 21.0
+text = "Hear"
+
+[node name="PanelContainer2" type="PanelContainer" parent="PlanetPanel/TabContainer/Details/GridContainer"]
 margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_right = 83.0
+margin_bottom = 60.0
 
-[node name="ItemList" type="ItemList" parent="PlanetPanel/TabContainer/Structures"]
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_top = -131.0
-margin_bottom = 100.0
-max_columns = 3
+[node name="HegemonL" type="Label" parent="PlanetPanel/TabContainer/Details/GridContainer/PanelContainer2"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 76.0
+margin_bottom = 21.0
+text = "Hegemony"
+align = 1
+valign = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="PlanetPanel/TabContainer/Structures"]
-margin_top = 238.0
-margin_right = 126.0
-margin_bottom = 268.0
-
-[node name="BuildButton" type="OptionButton" parent="PlanetPanel/TabContainer/Structures/MarginContainer"]
-margin_right = 126.0
-margin_bottom = 30.0
+[node name="Hegemon" type="Label" parent="PlanetPanel/TabContainer/Details/GridContainer"]
+margin_left = 87.0
+margin_top = 39.0
+margin_right = 165.0
+margin_bottom = 53.0
+text = "Dark Empire"
 
 [node name="Storage" type="Tabs" parent="PlanetPanel/TabContainer"]
 visible = false

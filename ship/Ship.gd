@@ -6,27 +6,27 @@ signal move(target)
 signal patrol()
 signal attack(target)
 
+var statistics = {
+	"hull": 100.0,
+	"hull_max": 100.0
+}
+
 var _target = null
 var _wander_angle: float = 0.0
 var _ANGLE_MAX: int = 10
-export var _current_speed: float = 0.0
+
 var _max_speed: float = 40.0
-var _max_thrust_force: float = 4
-var _max_steering_force: float = 8
 var _max_rotation_speed: float = 10 # 10 degrees/s
+var _arrival_radius = 150.0
 
 export var _thrust_vector: Vector2 = Vector2(0, 0)
+var _current_velocity := Vector2()
 
 func _ready() -> void:
 	connect("highlight", self, "_on_Ship_highlight")
 	connect("move", self, "_on_move_to_target")
 	connect("patrol", self, "_on_patrol_system")
 	connect("attack", self, "_on_attack")
-
-func _draw():
-	if _target != null:
-		draw_line(Vector2(0, 0), _target - get_global_position(), ColorN("red"), 1)
-		draw_line(Vector2(0, 0), Vector2(_current_speed, 0), ColorN("blue"), 2)
 
 func _on_Ship_highlight():
 	if not $Highlight.is_visible_in_tree():
@@ -41,20 +41,27 @@ func generate_thrust_force(steering_force):
 	var thrust_vector = Vector2(1, 0)
 	thrust_vector = thrust_vector.rotated(ship_rotation)
 	var thrust_projection = steering_force.project(thrust_vector)
-	if thrust_projection.normalized().dot(thrust_vector) == -1:
-		thrust_projection = Vector2(0, 0)
-	return thrust_projection
+	var dot_product = thrust_projection.normalized().dot(thrust_vector)
+	var t_dict = {
+		"projection": thrust_projection,
+		"dot_product": dot_product
+	}
+	return t_dict
 
 #project steering to rotation force vector
-func generate_rotation_force(steering_force):
+func generate_steering_angle(steering_force):
 	var ship_rotation = $Shape.get_rotation()
-	var rotation_force = Vector2(0, 1)
-	rotation_force = rotation_force.rotated(ship_rotation)
-	var rotation_projection = steering_force.project(rotation_force)
-	return rotation_projection
+	var thrust_vector = Vector2(1, 0)
+	thrust_vector = thrust_vector.rotated(ship_rotation)
+	var steering_angle = thrust_vector.angle_to(steering_force)
+	return rad2deg(steering_angle)
 
-# MOVEMENT FUNCTIONS
+func rotate_shape(rotation):
+	$Shape.rotate(deg2rad(rotation))
+
+
 ###########################################################################
+# MOVEMENT FUNCTIONS
 func seek(pos, target, velocity) -> Vector2:
 	var desired_velocity = target - pos 
 	var steering = desired_velocity - velocity
@@ -104,6 +111,10 @@ func evade(pos, pos_target, velocity, target_velocity, max_target_speed):
 	return flee(pos, future_position, velocity)
 
 ###########################################################################
+#
+
+##############################################################################
+
 func _on_move_to_target(target):
 	_target = target["global"]
 	$StateMachine._change_state("move")

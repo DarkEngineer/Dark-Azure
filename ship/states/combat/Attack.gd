@@ -1,23 +1,15 @@
 extends "res://ship/states/State.gd"
 
 func update(delta):
-	var vec = get_in_range(owner._target, 150.0)
-	vec = vec.normalized() * owner._speed
-	owner.move_and_slide(vec)
+	var target = owner._target.front().get_global_position()
+	attack_from_distance(delta, target, 100.0)
 
-func get_in_range(target_array, optimal_fire_range : float) -> Vector2: 
-	var pos = owner.get_global_position()
-	var target_pos = target_array.front().get_global_position()
-	var range_vector = Vector2(optimal_fire_range, 0)
-	var angle_vector = target_pos.angle_to_point(pos)
-	range_vector = range_vector.rotated(angle_vector)
-	target_pos -= range_vector
-	var rel_seek = owner.seek(pos, target_pos, owner._current_velocity)
-	var rel_arrival = owner.arrival(pos, target_pos, rel_seek, owner._speed, owner._arrival_radius)
-	return rel_arrival
-
-func search_best_target(target_array: Array):
-	var nearest_target = null
-	for i in target_array:
-		print(i)
-	var dist_vector = owner.get_global_position()
+func attack_from_distance(delta, target, distance):
+	var ship_pos = owner.get_global_position()
+	var distance_vector = target - ship_pos
+	var distance_n = distance_vector.normalized()
+	var d_v = distance_n * distance
+	var distance_final = distance_vector - d_v
+	var destination = ship_pos + distance_final
+	var steering = owner.seek(ship_pos, destination, Vector2(0,0))
+	owner.move_and_collide(steering * delta)

@@ -1,20 +1,19 @@
 extends "res://ship/states/State.gd"
 
 func update(delta):
-	var pos = owner.get_global_position()
-	var steering = owner.seek(pos, owner._target, Vector2(0, 0))
-	var thrust_force = owner.generate_thrust_force(steering)
-	var rotation_force = owner.generate_rotation_force(steering)
-	thrust_and_rotate(delta, thrust_force, rotation_force)
-	owner.update()
+	var ship_pos = owner.get_global_position()
+	var target = owner._target
+	var speed = owner._max_speed
+	var arrival_r = owner._arrival_radius
+	check_distance(ship_pos, target)
+	move(delta, ship_pos, target, Vector2(0, 0), speed, arrival_r)
 
-func thrust_and_rotate(delta, thrust, rotation):
-	var thrust_force: Vector2
-	if thrust.length() > owner._max_thrust_force:
-		thrust_force = thrust.clamped(owner._max_thrust_force)
-	else:
-		thrust_force = thrust
-	var ratio: float = thrust_force.length() / owner._max_thrust_force
-	print(ratio)
-	var thrust_speed = owner._max_speed * ratio
-	owner.move_and_collide(thrust_force.normalized() * thrust_speed * delta)
+func move(delta, pos, target, velocity, c_speed, radius):
+	var steering_force = owner.arrival(pos, target, velocity, c_speed, radius)
+	var steer_n = steering_force.normalized()
+	owner.move_and_collide(steer_n * c_speed * delta)
+
+func check_distance(ship_pos, target_pos):
+	var distance = target_pos - ship_pos
+	if distance.length() < 5.0:
+		emit_signal("finished", "previous")
