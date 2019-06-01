@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://TooltipPanel/TooltipPanel.gd" type="Script" id=1]
+[ext_resource path="res://TooltipPanel/orbitrion_16px.tres" type="DynamicFont" id=2]
+[ext_resource path="res://TooltipPanel/orbitrion_13px.tres" type="DynamicFont" id=3]
+[ext_resource path="res://TooltipPanel/orbitrion_12px.tres" type="DynamicFont" id=4]
+
+[node name="TooltipPanel" type="Panel" groups=[
+"Tooltips",
+]]
+margin_right = 235.0
+margin_bottom = 124.0
+script = ExtResource( 1 )
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+
+[node name="Name" type="Label" parent="VBox"]
+margin_right = 225.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 2 )
+text = "This is planet"
+align = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBox"]
+margin_top = 20.0
+margin_right = 225.0
+margin_bottom = 20.0
+
+[node name="Environment" type="Label" parent="VBox"]
+margin_top = 24.0
+margin_right = 225.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 3 )
+text = "Type: Oceanic"
+align = 1
+
+[node name="Owner" type="Label" parent="VBox"]
+margin_top = 42.0
+margin_right = 225.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 4 )
+text = "Government: None"
+align = 1
+
+[node name="Cities" type="Label" parent="VBox"]
+margin_top = 58.0
+margin_right = 225.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 4 )
+text = "Cities: 0"
+align = 1

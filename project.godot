@@ -9,25 +9,19 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
-"class": "PID_Controller",
+"base": "Area2D",
+"class": "ShipBody",
 "language": "GDScript",
-"path": "res://PID_Controller/PID_Controller.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "Ship",
-"language": "GDScript",
-"path": "res://ship/Ship.gd"
+"path": "res://ShipBody/ShipBody.gd"
 } ]
 _global_script_class_icons={
-"PID_Controller": "",
-"Ship": ""
+"ShipBody": ""
 }
 
 [application]
 
 config/name="Dark Azure"
-run/main_scene="res://main.tscn"
+run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -46,12 +40,17 @@ right_mouse={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
-scroll_down={
+middle_mouse={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":3,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+scroll_down_mouse={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
-scroll_up={
+scroll_up_mouse={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
  ]
