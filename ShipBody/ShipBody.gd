@@ -22,9 +22,12 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-	_target = get_global_mouse_position()
+	if _target is Vector2:
+		seek(_target, _acceleration, delta)
+
+func seek(target, acceleration, delta):
 	rotate_ship(_target, delta)
-	move_forward(_target, _acceleration, delta)
+	move_forward(target, acceleration, delta)
 
 func thrust(c_thrust: float, c_angle: float) -> Vector2:
 	var thruster = Vector2()
@@ -39,7 +42,13 @@ func move_forward(target_pos, c_acceleration, delta):
 	var limiter = create_thrust_limiter(target_pos)
 	var new_position = get_position() + thrust(get_thrust(), get_rotation()) * delta * limiter
 	set_position(new_position)
-	
+
+func check_arrival(t_pos, pos):
+	var dist = t_pos - pos
+	var arrival_dist = 5.0
+	dist = dist.length()
+	if dist <= arrival_dist:
+		_target = null
 
 func accelerate(c_acceleration, delta):
 	_thrust += c_acceleration * delta
@@ -53,7 +62,7 @@ func create_thrust_limiter(t_pos) -> float:
 	var ship_direction = Vector2(1, 0).rotated(get_rotation())
 	var dot = direction.dot(ship_direction)
 	var arrival = 1.0
-	var slowing_radius = 100.0
+	var slowing_radius = 50.0
 	
 	if distance <= slowing_radius:
 		 arrival = distance / slowing_radius
