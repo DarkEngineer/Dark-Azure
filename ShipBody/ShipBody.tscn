@@ -37,6 +37,7 @@ polygon = PoolVector2Array( 0.0657119, -12.2503, 7.53277, 12.4169, 0.197031, 6.5
 visible = false
 rotation = 6.28292
 scale = Vector2( 1.08158, 1.08158 )
+z_index = 1
 texture = ExtResource( 3 )
 
 [node name="Animation" type="AnimationPlayer" parent="Selection"]

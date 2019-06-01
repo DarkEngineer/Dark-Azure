@@ -26,7 +26,7 @@ func _physics_process(delta):
 		seek(_target, _acceleration, delta)
 
 func seek(target, acceleration, delta):
-	rotate_ship(_target, delta)
+	rotate_ship(target, delta)
 	move_forward(target, acceleration, delta)
 
 func thrust(c_thrust: float, c_angle: float) -> Vector2:
