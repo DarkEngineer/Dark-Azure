@@ -41,6 +41,12 @@ texture = ExtResource( 3 )
 
 [node name="Animation" type="AnimationPlayer" parent="Selection"]
 anims/Selection = SubResource( 1 )
+
+[node name="Layer" type="CanvasLayer" parent="."]
+
+[node name="Test" type="Label" parent="Layer"]
+margin_right = 40.0
+margin_bottom = 14.0
 [connection signal="input_event" from="." to="." method="_on_ShipBody_input_event"]
 [connection signal="draw" from="Selection" to="." method="_on_Selection_draw"]
 [connection signal="hide" from="Selection" to="." method="_on_Selection_hide"]
