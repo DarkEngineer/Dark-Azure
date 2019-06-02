@@ -49,19 +49,26 @@ polygon = PoolVector2Array( 0.0657119, -12.2503, 7.53277, 12.4169, 0.197031, 6.5
 
 [node name="Selection" type="Sprite" parent="."]
 visible = false
-modulate = Color( 0.912927, 0.846872, 1, 1 )
+modulate = Color( 0.944548, 0.902481, 1, 1 )
 rotation = 1.5708
-scale = Vector2( 0.6, 0.907656 )
+scale = Vector2( 0.6, 0.904876 )
 z_index = 1
 texture = ExtResource( 3 )
 
 [node name="Animation" type="AnimationPlayer" parent="Selection"]
 anims/Selection = SubResource( 1 )
 
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-autostart = true
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 31.0
+text = "Dead
+"
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
 [connection signal="input_event" from="." to="." method="_on_ShipBody_input_event"]
 [connection signal="draw" from="Selection" to="." method="_on_Selection_draw"]
 [connection signal="hide" from="Selection" to="." method="_on_Selection_hide"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

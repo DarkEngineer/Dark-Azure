@@ -72,7 +72,6 @@ func check_if_arrived(t_pos, pos, end_move_radius):
 	if distance <= end_move_radius:
 		set_status("IDLE")
 		reset_movement()
-		$Timer.start()
 
 func arrival(t_pos, pos, arrival_radius):
 	var distance = (t_pos - pos).length()
@@ -160,6 +159,3 @@ func _on_Selection_draw():
 func _on_Selection_hide():
 	stop_selection_animation()
 
-
-func _on_Timer_timeout():
-	search_for_target("Planets")
