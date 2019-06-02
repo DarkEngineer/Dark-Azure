@@ -22,6 +22,8 @@ tracks/0/keys = {
 }
 
 [node name="ShipBody" type="Area2D"]
+z_index = 1
+collision_layer = 0
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -30,7 +32,7 @@ scale = Vector2( 0.3, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="Shape" type="CollisionPolygon2D" parent="."]
-rotation = 1.56485
+rotation = 1.5708
 polygon = PoolVector2Array( 0.0657119, -12.2503, 7.53277, 12.4169, 0.197031, 6.54157, -7.77641, 12.5689 )
 
 [node name="Selection" type="Sprite" parent="."]

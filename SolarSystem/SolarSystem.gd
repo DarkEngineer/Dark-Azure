@@ -1,6 +1,7 @@
 extends Node2D
 
 var Planet = preload("res://SolarSystem/Planet.tscn")
+var Ship = preload("res://ShipBody/ShipBody.tscn")
 
 var _planets_created = 0
 
@@ -9,6 +10,8 @@ func _ready():
 	for i in range(3):
 		var planet_radius = create_planet_radius(_planets_created)
 		create_planet(planet_radius)
+	#for i in range(10):
+		#create_ship()
 
 func create_planet(radius):
 	var planet = Planet.instance()
@@ -30,4 +33,9 @@ func create_planet_radius(planet_count):
 	radius.y = sin(angle) * distance
 	
 	return radius
-	
+
+func create_ship():
+	var ship = Ship.instance()
+	ship.set_name("ship_%d" % [randi() % 10000])
+	ship.set_position(Vector2(randi() % 1000, randi() % 1000))
+	add_child(ship)
