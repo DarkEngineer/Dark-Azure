@@ -9,6 +9,7 @@ export var _thrust: float = 0.0 setget , get_thrust
 var _acceleration: float = 10.0
 
 var _arrival_radius = 100.0
+var _arrived_radius = 5.0
 
 #rotation variables
 var _angular_velocity = 0.0
@@ -21,15 +22,36 @@ var _max_angular_velocity: float = 15.0
 var _target = null
 var _target_object = null
 
+enum STATES {
+	IDLE = 0,
+	SEEK = 1
+}
+
+var _status = STATES.IDLE
+
 func _ready():
 	randomize()
 	
 
 func _physics_process(delta):
-	seek(get_global_mouse_position(), _acceleration, delta)
+	if _status == STATES.SEEK:
+		seek(_target, _acceleration, _arrived_radius, delta)
 
+func set_status(state: String):
+	_status = STATES[state]
 
-func seek(target, acceleration, delta):
+func search_for_target(group: String):
+	var objects = get_tree().get_nodes_in_group(group)
+	if _target_object != null:
+		objects.erase(_target_object)
+		_target_object = null
+	var rand_index = randi() % objects.size()
+	_target = objects[rand_index].get_position()
+	_target_object = objects[rand_index]
+	set_status("SEEK")
+
+func seek(target, acceleration, arrived_radius, delta):
+	check_if_arrived(target, get_position(), arrived_radius)
 	rotate_ship(target, delta)
 	move_forward(target, acceleration, delta)
 
@@ -46,6 +68,13 @@ func move_forward(target_pos, c_acceleration, delta):
 	var new_position = get_position() + thrust(get_thrust(), get_rotation()) * delta
 	set_position(new_position)
 
+
+func check_if_arrived(t_pos, pos, end_move_radius):
+	var distance = (t_pos - pos).length()
+	if distance <= end_move_radius:
+		set_status("IDLE")
+		reset_movement()
+		$Timer.start()
 
 func arrival(t_pos, pos, arrival_radius):
 	var distance = (t_pos - pos).length()
@@ -132,3 +161,6 @@ func _on_Selection_draw():
 func _on_Selection_hide():
 	stop_selection_animation()
 
+
+func _on_Timer_timeout():
+	search_for_target("Planets")
