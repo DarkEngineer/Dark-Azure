@@ -123,6 +123,11 @@ func rotate_ship(t_pos, delta):
 			_angular_velocity = min(_angular_velocity, deg2rad(_max_angular_velocity))
 		
 		rotate(_angular_velocity * delta)
+		rotate_ship_ui(_angular_velocity, delta)
+		
+
+func rotate_ship_ui(ang_velocity, delta):
+	$ShipUI/ShipUINode.rotate(-ang_velocity * delta)
 
 func select_target(target_pos):
 	_target = target_pos

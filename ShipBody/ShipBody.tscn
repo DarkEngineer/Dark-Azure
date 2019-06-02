@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ShipBody/ShipBody.gd" type="Script" id=1]
 [ext_resource path="res://assets/red_arrow_ship.svg" type="Texture" id=2]
 [ext_resource path="res://assets/object_selection_2.svg" type="Texture" id=3]
+[ext_resource path="res://assets/health_bar_1.svg" type="Texture" id=4]
+[ext_resource path="res://assets/shield_bar_1.svg" type="Texture" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Selection"
@@ -58,17 +60,42 @@ texture = ExtResource( 3 )
 [node name="Animation" type="AnimationPlayer" parent="Selection"]
 anims/Selection = SubResource( 1 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="ShipUI" type="Control" parent="."]
+visible = false
+margin_left = -26.5365
+margin_top = -22.0303
+margin_right = 29.4635
+margin_bottom = 19.9697
+rect_pivot_offset = Vector2( 26.5365, 22.0303 )
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-margin_right = 40.0
-margin_bottom = 31.0
-text = "Dead
-"
+[node name="ShipUINode" type="Node2D" parent="ShipUI"]
+position = Vector2( 26.5365, 22.0303 )
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="VBox" type="VBoxContainer" parent="ShipUI/ShipUINode"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -18.5365
+margin_top = -22.0303
+margin_right = 21.4635
+margin_bottom = -15.0303
+custom_constants/separation = 0
+
+[node name="Armor" type="TextureProgress" parent="ShipUI/ShipUINode/VBox"]
 margin_right = 40.0
-margin_bottom = 40.0
+margin_bottom = 3.0
+size_flags_vertical = 3
+value = 100.0
+texture_progress = ExtResource( 4 )
+nine_patch_stretch = true
+
+[node name="Shield" type="TextureProgress" parent="ShipUI/ShipUINode/VBox"]
+margin_top = 3.0
+margin_right = 40.0
+margin_bottom = 7.0
+size_flags_vertical = 3
+value = 100.0
+texture_progress = ExtResource( 5 )
+nine_patch_stretch = true
 [connection signal="input_event" from="." to="." method="_on_ShipBody_input_event"]
 [connection signal="draw" from="Selection" to="." method="_on_Selection_draw"]
 [connection signal="hide" from="Selection" to="." method="_on_Selection_hide"]
