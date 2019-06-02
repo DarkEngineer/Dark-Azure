@@ -42,6 +42,8 @@ texture = ExtResource( 3 )
 
 [node name="AnimationSelect" type="AnimationPlayer" parent="Select"]
 anims/Selection = SubResource( 2 )
+
+[node name="Surface" type="Node" parent="."]
 [connection signal="input_event" from="." to="." method="_on_Planet_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_Planet_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_Planet_mouse_exited"]
