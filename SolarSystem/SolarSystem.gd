@@ -10,8 +10,8 @@ func _ready():
 	for i in range(3):
 		var planet_radius = create_planet_radius(_planets_created)
 		create_planet(planet_radius)
-	#for i in range(10):
-		#create_ship()
+	for i in range(10):
+		create_ship()
 
 func create_planet(radius):
 	var planet = Planet.instance()

@@ -31,7 +31,6 @@ var _status = STATES.IDLE
 
 func _ready():
 	randomize()
-	
 
 func _physics_process(delta):
 	if _status == STATES.SEEK:
@@ -68,7 +67,6 @@ func move_forward(target_pos, c_acceleration, delta):
 	var new_position = get_position() + thrust(get_thrust(), get_rotation()) * delta
 	set_position(new_position)
 
-
 func check_if_arrived(t_pos, pos, end_move_radius):
 	var distance = (t_pos - pos).length()
 	if distance <= end_move_radius:
@@ -97,7 +95,8 @@ func apply_accelerate(c_acceleration, delta):
 
 #create desired thrust which is projected at ship_direction
 func create_desired_thrust(t_pos) -> float:
-	var desired_velocity = (t_pos - get_position()).normalized() * _max_thrust * arrival(t_pos, get_position(), _arrival_radius)
+	var limiter = arrival(t_pos, get_position(), _arrival_radius)
+	var desired_velocity = (t_pos - get_position()).normalized() * _max_thrust * limiter
 	var desired_direction = desired_velocity.normalized()
 	var ship_direction = Vector2(1, 0).rotated(get_rotation())
 	var desired_thrust_projection = desired_velocity.project(ship_direction)
@@ -106,7 +105,6 @@ func create_desired_thrust(t_pos) -> float:
 		desired_thrust_projection = Vector2(0, 0)
 	
 	return desired_thrust_projection.length()
-
 
 func rotate_ship(t_pos, delta):
 	var direction = (t_pos - get_global_position()).normalized()
@@ -148,6 +146,7 @@ func start_selection_animation():
 
 func stop_selection_animation():
 	animation.stop(true)
+
 
 func _on_ShipBody_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("left_mouse"):
