@@ -1,7 +1,6 @@
 extends Control
 
 """ 
-
 #####  Color Palette by Paletton.com
 #####  Palette URL: http://paletton.com/#uid=53M0u0k++HEuXZKRO+V+Wtg+amV
 
@@ -20,7 +19,7 @@ extends Control
    shade 1 = #5A24FC = rgb( 90, 36,252) = rgba( 90, 36,252,1) = rgb0(0.353,0.141,0.988)
    shade 2 = #4608FF = rgb( 70,  8,255) = rgba( 70,  8,255,1) = rgb0(0.275,0.031,1)
    shade 3 = #2800A0 = rgb( 40,  0,160) = rgba( 40,  0,160,1) = rgb0(0.157,0,0.627)
-   shade 4 = #20007D = rgb( 32,  0,125) = rgba( 32,  0,125,1) = rgb0(0.125,0,0.49)
+   shade 4 = #20007E = rgb( 32,  0,126) = rgba( 32,  0,126,1) = rgb0(0.125,0,0.494)
 
 *** Secondary color (2):
 
