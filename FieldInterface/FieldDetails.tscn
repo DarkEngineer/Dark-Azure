@@ -1,0 +1,104 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/themes/default_dynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://FieldInterface/Build Menu.gd" type="Script" id=2]
+[ext_resource path="res://FieldInterface/StructCell.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 1 )
+
+[node name="FieldDetails" type="PanelContainer"]
+margin_right = 262.0
+margin_bottom = 239.0
+theme = SubResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 255.0
+margin_bottom = 232.0
+
+[node name="Top" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 248.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="VBoxContainer/Top"]
+margin_left = 82.0
+margin_top = 3.0
+margin_right = 142.0
+margin_bottom = 17.0
+size_flags_horizontal = 6
+text = "Field Details"
+
+[node name="Button" type="Button" parent="VBoxContainer/Top"]
+margin_left = 229.0
+margin_right = 248.0
+margin_bottom = 20.0
+text = "X"
+flat = true
+
+[node name="Details" type="TabContainer" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 248.0
+margin_bottom = 225.0
+size_flags_vertical = 3
+
+[node name="Status" type="GridContainer" parent="VBoxContainer/Details"]
+editor/display_folded = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+columns = 2
+
+[node name="LblOwner" type="Label" parent="VBoxContainer/Details/Status"]
+margin_right = 98.0
+margin_bottom = 14.0
+text = "Owned by: "
+
+[node name="LblOwnerData" type="Label" parent="VBoxContainer/Details/Status"]
+margin_left = 102.0
+margin_right = 137.0
+margin_bottom = 14.0
+text = "None"
+
+[node name="LblStruct" type="Label" parent="VBoxContainer/Details/Status"]
+margin_top = 18.0
+margin_right = 98.0
+margin_bottom = 32.0
+text = "Structure built:"
+
+[node name="LblStructData" type="Label" parent="VBoxContainer/Details/Status"]
+margin_left = 102.0
+margin_top = 18.0
+margin_right = 137.0
+margin_bottom = 32.0
+text = "None"
+
+[node name="LblMCost" type="Label" parent="VBoxContainer/Details/Status"]
+margin_top = 36.0
+margin_right = 98.0
+margin_bottom = 50.0
+text = "Maintanance cost: "
+
+[node name="LblMCostData" type="Label" parent="VBoxContainer/Details/Status"]
+margin_left = 102.0
+margin_top = 36.0
+margin_right = 137.0
+margin_bottom = 50.0
+text = "100 CR"
+
+[node name="Build Menu" type="ScrollContainer" parent="VBoxContainer/Details"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+script = ExtResource( 2 )
+
+[node name="Struct_1" parent="VBoxContainer/Details/Build Menu" instance=ExtResource( 3 )]
+margin_bottom = 14.0

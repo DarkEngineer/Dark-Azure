@@ -23,7 +23,7 @@ func get_data() -> Dictionary:
 	return _data
 
 func set_structure(struct: Structure):
-	get_data().structure = struct
+	_data.structure = struct
 
 func get_structure() -> Structure:
 	return get_data().structure
