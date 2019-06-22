@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://PlanetTile/Field/Building.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+_type = 1
+_description = "Building for mining mineral deposit"
+_building_time = 90
+_building_cost = {
+"credits": 4000.0,
+"metal": 250.0,
+"wood": 150.0,
+"workers": 50.0
+}
