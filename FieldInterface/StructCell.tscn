@@ -41,17 +41,16 @@ size_flags_horizontal = 3
 text = "30 days"
 
 [node name="LblCost" type="Label" parent="StructInfo"]
-margin_top = 44.0
+margin_top = 36.0
 margin_right = 40.0
-margin_bottom = 58.0
+margin_bottom = 50.0
 text = "Cost: "
 
 [node name="LblCostData" type="Label" parent="StructInfo"]
 margin_left = 44.0
 margin_top = 36.0
 margin_right = 263.0
-margin_bottom = 67.0
-text = "Wood [img][/img] [color=red]43[/color] [...]"
+margin_bottom = 50.0
+text = "Wood 34"
 autowrap = true
-percent_visible = -0.0243902
 [connection signal="gui_input" from="." to="." method="_on_StructCell_gui_input"]

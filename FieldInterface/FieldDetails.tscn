@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/themes/default_dynamicfont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://FieldInterface/FieldDetails.gd" type="Script" id=2]
-[ext_resource path="res://FieldInterface/StructCell.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 1 )
@@ -46,6 +45,7 @@ size_flags_vertical = 3
 
 [node name="Status" type="GridContainer" parent="VBoxContainer/Details"]
 editor/display_folded = true
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -92,7 +92,6 @@ margin_bottom = 50.0
 text = "100 CR"
 
 [node name="Buildings" type="VBoxContainer" parent="VBoxContainer/Details"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -107,32 +106,8 @@ margin_bottom = 229.0
 size_flags_vertical = 3
 
 [node name="BuildList" type="GridContainer" parent="VBoxContainer/Details/Buildings/BuildMenu"]
-editor/display_folded = true
 margin_right = 292.0
 size_flags_horizontal = 3
-
-[node name="Struct_1" parent="VBoxContainer/Details/Buildings/BuildMenu/BuildList" instance=ExtResource( 3 )]
-margin_right = 280.0
-
-[node name="Struct_2" parent="VBoxContainer/Details/Buildings/BuildMenu/BuildList" instance=ExtResource( 3 )]
-margin_top = 68.0
-margin_right = 280.0
-margin_bottom = 132.0
-
-[node name="Struct_3" parent="VBoxContainer/Details/Buildings/BuildMenu/BuildList" instance=ExtResource( 3 )]
-margin_top = 136.0
-margin_right = 280.0
-margin_bottom = 200.0
-
-[node name="Struct_4" parent="VBoxContainer/Details/Buildings/BuildMenu/BuildList" instance=ExtResource( 3 )]
-margin_top = 204.0
-margin_right = 280.0
-margin_bottom = 268.0
-
-[node name="Struct_5" parent="VBoxContainer/Details/Buildings/BuildMenu/BuildList" instance=ExtResource( 3 )]
-margin_top = 272.0
-margin_right = 280.0
-margin_bottom = 336.0
 
 [node name="BuildOptions" type="HBoxContainer" parent="VBoxContainer/Details/Buildings"]
 margin_top = 233.0
