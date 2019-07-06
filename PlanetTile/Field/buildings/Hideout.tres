@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
+_name = "Hideout"
 _type = 2
 _description = ""
 _building_time = 180

@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://PlanetTile/Field/Building.gd"
 }, {
+"base": "Node",
+"class": "Market",
+"language": "GDScript",
+"path": "res://Market.gd"
+}, {
 "base": "Resource",
 "class": "Structure",
 "language": "GDScript",
@@ -21,6 +26,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Building": "",
+"Market": "",
 "Structure": ""
 }
 

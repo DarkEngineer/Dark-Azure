@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
+_name = "Mine"
 _type = 1
 _description = "Building for mining mineral deposit"
 _building_time = 90

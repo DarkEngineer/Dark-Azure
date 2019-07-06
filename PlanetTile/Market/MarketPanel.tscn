@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://PlanetTile/Market/MarketPanel.gd" type="Script" id=1]
+
+[node name="MarketPanel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Box" type="PanelContainer" parent="."]
+margin_right = 700.0
+margin_bottom = 420.0
+
+[node name="Rows" type="VBoxContainer" parent="Box"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 693.0
+margin_bottom = 413.0
+
+[node name="Title" type="Label" parent="Box/Rows"]
+margin_right = 686.0
+margin_bottom = 14.0
+text = "Marketplace"
+align = 1
+
+[node name="Tree" type="Tree" parent="Box/Rows"]
+margin_top = 18.0
+margin_right = 686.0
+margin_bottom = 406.0
+size_flags_vertical = 3
+columns = 3
+hide_folding = true
+select_mode = 1

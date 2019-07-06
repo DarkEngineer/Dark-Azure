@@ -2,6 +2,8 @@ extends Node
 
 var field_node = preload("res://PlanetTile/Field/Field.tscn")
 
+var Market = null
+
 var _data = {
 	"coord": Vector2(-1, -1),
 	"tile_size": {
@@ -12,9 +14,7 @@ var _data = {
 } setget set_data, get_data
 
 func _ready():
-	for i in range(2):
-		for j in range(2):
-			add_field(Vector2(i, j))
+	pass
 
 func set_data(data: Dictionary) -> void:
 	_data = data
