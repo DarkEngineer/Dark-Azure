@@ -87,6 +87,7 @@ margin_right = 498.0
 margin_bottom = 338.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 3 )
+tab_align = 0
 
 [node name="Offers" type="Tabs" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer"]
 anchor_right = 1.0
@@ -100,110 +101,21 @@ margin_bottom = -4.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Offers" type="Tree" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox"]
+[node name="SellOrders" type="Tree" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox"]
 margin_right = 490.0
 margin_bottom = 141.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+columns = 2
+hide_folding = true
+select_mode = 1
 
-[node name="OfferDetails" type="Panel" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox"]
+[node name="BuyOrders" type="Tree" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox"]
 margin_top = 145.0
 margin_right = 490.0
 margin_bottom = 287.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="ODMargin" type="MarginContainer" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox/OfferDetails"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
-
-[node name="VBox" type="VBoxContainer" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox/OfferDetails/ODMargin"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 480.0
-margin_bottom = 132.0
-
-[node name="Label" type="Label" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox/OfferDetails/ODMargin/VBox"]
-margin_right = 470.0
-margin_bottom = 12.0
-text = "Offer Information"
-align = 1
-
-[node name="OfferInfo" type="GridContainer" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox/OfferDetails/ODMargin/VBox"]
-margin_top = 16.0
-margin_right = 470.0
-margin_bottom = 96.0
-columns = 2
-
-[node name="LblProduct" type="Label" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox/OfferDetails/ODMargin/VBox/OfferInfo"]
-margin_right = 93.0
-margin_bottom = 12.0
-text = "Product Name: "
-
-[node name="LblProductData" type="Label" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox/OfferDetails/ODMargin/VBox/OfferInfo"]
-margin_left = 97.0
-margin_right = 194.0
-margin_bottom = 12.0
-text = "Product #1"
-
-[node name="LblQuantity" type="Label" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox/OfferDetails/ODMargin/VBox/OfferInfo"]
-margin_top = 21.0
-margin_right = 93.0
-margin_bottom = 33.0
-text = "Quantity: "
-
-[node name="QuantityData" type="SpinBox" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox/OfferDetails/ODMargin/VBox/OfferInfo"]
-margin_left = 97.0
-margin_top = 16.0
-margin_right = 194.0
-margin_bottom = 38.0
-
-[node name="LblPrice" type="Label" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox/OfferDetails/ODMargin/VBox/OfferInfo"]
-margin_top = 47.0
-margin_right = 93.0
-margin_bottom = 59.0
-text = "Price per unit: "
-
-[node name="PriceData" type="SpinBox" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox/OfferDetails/ODMargin/VBox/OfferInfo"]
-margin_left = 97.0
-margin_top = 42.0
-margin_right = 194.0
-margin_bottom = 64.0
-
-[node name="LblCost" type="Label" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox/OfferDetails/ODMargin/VBox/OfferInfo"]
-margin_top = 68.0
-margin_right = 93.0
-margin_bottom = 80.0
-text = "Total Cost: "
-
-[node name="LblCostData" type="Label" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox/OfferDetails/ODMargin/VBox/OfferInfo"]
-margin_left = 97.0
-margin_top = 68.0
-margin_right = 194.0
-margin_bottom = 80.0
-text = "103 567 Credits"
-
-[node name="HBox" type="HBoxContainer" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox/OfferDetails/ODMargin/VBox"]
-margin_top = 100.0
-margin_right = 470.0
-margin_bottom = 118.0
-
-[node name="CreateOffer" type="Button" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox/OfferDetails/ODMargin/VBox/HBox"]
-margin_left = 276.0
-margin_right = 371.0
-margin_bottom = 18.0
-size_flags_horizontal = 10
-text = "Create Offer"
-
-[node name="CancelOffer" type="Button" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox/OfferDetails/ODMargin/VBox/HBox"]
-margin_left = 375.0
-margin_right = 470.0
-margin_bottom = 18.0
-size_flags_horizontal = 0
-text = "Cancel Offer"
 
 [node name="Button" type="Button" parent="."]
 margin_left = 437.079
