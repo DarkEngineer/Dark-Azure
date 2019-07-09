@@ -5,12 +5,14 @@ var _name
 var _amount
 var _price
 var _id
+var _trader_id
 
-func _init(order_name, order_amount, order_price, order_id):
+func _init(order_name, order_amount, order_price, order_id, trader_id):
 	_name = order_name
 	_amount = order_amount
 	_price = order_price
 	_id = order_id
+	_trader_id = trader_id
 
 func get_name():
 	return _name
@@ -23,6 +25,9 @@ func get_price():
 
 func get_id():
 	return _id
+
+func get_trader_id():
+	return _trader_id
 
 func take_amount(units: int) -> bool:
 	var t_units = abs(units)

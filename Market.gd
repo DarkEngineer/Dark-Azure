@@ -22,8 +22,13 @@ func get_next_order_id():
 	_next_order_id += 1
 	return id
 
-func create_order(o_name: String, o_amount: int, o_price: float, o_id: int) -> Order:
-	var order = Order.new(o_name, o_amount, o_price, o_id)
+func get_next_trader_id():
+	var t_id = _next_trader_id
+	_next_trader_id += 1
+	return t_id
+
+func create_order(o_name: String, o_amount: int, o_price: float, o_id: int, o_trader_id: int = -1) -> Order:
+	var order = Order.new(o_name, o_amount, o_price, o_id, o_trader_id)
 	
 	return order
 
@@ -47,17 +52,20 @@ func order_check(buy_order, sell_order_array):
 		if buy_price >= sell_price:
 			if buy_amount <= sell_amount:
 				#resolve order
-				resolve_buy_order(buy_order, sell_order)
 				resolve_sell_order(sell_order)
+				resolve_buy_order(buy_order, sell_order)
+				
 
 func resolve_buy_order(buy_order: Order, sell_order: Order):
 	sell_order.take_amount(buy_order.get_amount())
 	_buy_orders.erase(buy_order)
 	print("Bought %d %s by price of %f" % [buy_order.get_amount(), buy_order.get_name(), sell_order.get_price()])
+	buy_order.free()
 
 func resolve_sell_order(sell_order: Order):
 	if sell_order.get_amount() == 0:
 		_sell_orders.erase(sell_order)
+		sell_order.free()
 
 func simulate_sell_orders(units):
 	for i in range(units):
