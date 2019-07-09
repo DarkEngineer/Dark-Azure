@@ -7,69 +7,36 @@ var _buy_orders = []
 var _traders = []
 
 var _next_order_id = 0
+var _next_trader_id = 0
 
 enum ORDER_TYPES {SELL, BUY}
 
-class Order:
-	var _name
-	var _amount
-	var _price
-	var _id
-	
-	func _init(order_name, order_amount, order_price, order_id):
-		_name = order_name
-		_amount = order_amount
-		_price = order_price
-		_id = order_id
-	
-	func get_name():
-		return _name
-	
-	func get_amount() -> int:
-		return _amount
-	
-	func get_price():
-		return _price
-	
-	func get_id():
-		return _id
-	
-	func take_amount(units: int) -> bool:
-		var t_units = abs(units)
-		if t_units <= get_amount():
-			_amount -= t_units
-			return true
-		return false
-	
-	func check_order():
-		if get_amount() <= 0:
-			free()
-	
+signal trader_orders_requested(trader_id, type)
 
-class Trader:
-	var _orders = []
-	var _average_price = 0.0
 
 func _ready():
-	pass
+	connect("trader_orders_requested", self, "on_get_trader_orders")
 
 func get_next_order_id():
 	var id = _next_order_id
 	_next_order_id += 1
 	return id
 
-func create_order(o_name, o_amount, o_price, o_id) -> Order:
+func create_order(o_name: String, o_amount: int, o_price: float, o_id: int) -> Order:
 	var order = Order.new(o_name, o_amount, o_price, o_id)
 	
 	return order
 
-func create_sell_order(o_name, o_amount, o_price, o_id):
-	var order_obj = create_order(o_name, o_amount, o_price, o_id)
+func create_sell_order(o_name: String, o_amount: int, o_price: float) -> Order:
+	var order_obj = create_order(o_name, o_amount, o_price, get_next_order_id())
 	_sell_orders.append(order_obj)
+	return order_obj
 
-func create_buy_order(o_name, o_amount, o_price, o_id):
-	var order_obj = create_order(o_name, o_amount, o_price, o_id)
+func create_buy_order(o_name: String, o_amount: int, o_price: float) -> Order:
+	var order_obj = create_order(o_name, o_amount, o_price, get_next_order_id())
 	_buy_orders.append(order_obj)
+	order_check(order_obj, _sell_orders)
+	return order_obj
 
 func order_check(buy_order, sell_order_array):
 	var buy_amount = buy_order.get_amount()
@@ -80,19 +47,25 @@ func order_check(buy_order, sell_order_array):
 		if buy_price >= sell_price:
 			if buy_amount <= sell_amount:
 				#resolve order
-				resolve_order(buy_order, sell_order)
+				resolve_buy_order(buy_order, sell_order)
+				resolve_sell_order(sell_order)
 
-func resolve_order(buy_order: Order, sell_order: Order):
+func resolve_buy_order(buy_order: Order, sell_order: Order):
 	sell_order.take_amount(buy_order.get_amount())
-	buy_order.free()
+	_buy_orders.erase(buy_order)
+	print("Bought %d %s by price of %f" % [buy_order.get_amount(), buy_order.get_name(), sell_order.get_price()])
+
+func resolve_sell_order(sell_order: Order):
+	if sell_order.get_amount() == 0:
+		_sell_orders.erase(sell_order)
 
 func simulate_sell_orders(units):
 	for i in range(units):
-		create_sell_order("Coal", randi() % 300 + 1, randf() * 3.5 + 0.01, get_next_order_id())
+		create_sell_order("Coal", randi() % 300 + 1, randf() * 3.5 + 0.01)
 
 func simulate_buy_orders(units):
 	for i in range(units):
-		create_buy_order("Coal", randi() % 300 + 1, randf() * 3.5 + 0.01, get_next_order_id())
+		create_buy_order("Coal", randi() % 250 + 30, randf() * 3.5 + 0.01)
 
 func calculate_average_sell_price():
 	var avg_price = 0.0
@@ -101,8 +74,11 @@ func calculate_average_sell_price():
 	avg_price = avg_price / float(_sell_orders.size())
 	return avg_price
 
+func on_get_trader_orders(id, type):
+	pass
+
 func _on_Timer_timeout():
 	simulate_sell_orders(randi() % 10)
 	simulate_buy_orders(randi() % 20)
 	$MarketInterface.update_sell_orders(_sell_orders)
-	print(calculate_average_sell_price())
+	$MarketInterface.update_buy_orders(_buy_orders)

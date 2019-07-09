@@ -101,7 +101,13 @@ margin_bottom = -4.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[node name="Label" type="Label" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox"]
+margin_right = 490.0
+margin_bottom = 12.0
+text = "Sellers"
+
 [node name="SellOrders" type="Tree" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox"]
+margin_top = 16.0
 margin_right = 490.0
 margin_bottom = 141.0
 size_flags_horizontal = 3
@@ -110,12 +116,20 @@ columns = 2
 hide_folding = true
 select_mode = 1
 
-[node name="BuyOrders" type="Tree" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox"]
+[node name="Label2" type="Label" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox"]
 margin_top = 145.0
+margin_right = 490.0
+margin_bottom = 157.0
+text = "Buyers"
+
+[node name="BuyOrders" type="Tree" parent="Margin/VBox/MarketTabs/Offers/MarginRight/RightVBox/TabContainer/Offers/OfferVBox"]
+margin_top = 161.0
 margin_right = 490.0
 margin_bottom = 287.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+columns = 2
+select_mode = 1
 
 [node name="Button" type="Button" parent="."]
 margin_left = 437.079
