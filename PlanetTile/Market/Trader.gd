@@ -22,3 +22,13 @@ func make_buy_order(market, o_name: String, o_amount: int, o_price: float):
 func make_sell_order(market, o_name: String, o_amount: int, o_price: float):
 	market.create_sell_order(o_name, o_amount, o_price)
 
+func add_resources(r_name: String, r_amount: int) -> bool:
+	for r_obj in _available_resources:
+		if r_obj.name == r_name:
+			r_obj.amount += r_amount
+			return true
+	_available_resources.append({
+		"name": r_name,
+		"amount": r_amount
+	})
+	return true
