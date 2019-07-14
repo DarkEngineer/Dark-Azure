@@ -6,6 +6,7 @@ var _amount
 var _price
 var _id
 var _trader_id
+var _time
 
 func _init(order_name, order_amount, order_price, order_id, trader_id):
 	_name = order_name
@@ -28,6 +29,9 @@ func get_id():
 
 func get_trader_id():
 	return _trader_id
+
+func get_time_decay():
+	return _time
 
 func take_amount(units: int) -> bool:
 	var t_units = abs(units)
