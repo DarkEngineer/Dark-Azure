@@ -1,4 +1,4 @@
 extends Panel
 
 func update_traders(traders_array: Array):
-	print(traders_array)
+	print("Traders: %s" % [str(traders_array)])
