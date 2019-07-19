@@ -15,31 +15,31 @@ _global_script_classes=[ {
 "path": "res://PlanetTile/Field/Building.gd"
 }, {
 "base": "Node",
+"class": "Commodities",
+"language": "GDScript",
+"path": "res://Commodities.gd"
+}, {
+"base": "Node",
 "class": "Market",
 "language": "GDScript",
 "path": "res://Market.gd"
 }, {
 "base": "Node",
-"class": "Order",
+"class": "MarketAgent",
 "language": "GDScript",
-"path": "res://PlanetTile/Market/Order.gd"
+"path": "res://MarketAgent.gd"
 }, {
 "base": "Resource",
 "class": "Structure",
 "language": "GDScript",
 "path": "res://PlanetTile/Field/Structure.gd"
-}, {
-"base": "Node",
-"class": "Trader",
-"language": "GDScript",
-"path": "res://PlanetTile/Market/Trader.gd"
 } ]
 _global_script_class_icons={
 "Building": "",
+"Commodities": "",
 "Market": "",
-"Order": "",
-"Structure": "",
-"Trader": ""
+"MarketAgent": "",
+"Structure": ""
 }
 
 [application]
