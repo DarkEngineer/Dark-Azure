@@ -84,7 +84,7 @@ class CommodityStock:
 		_quantity += quant
 		if left_over > 0:
 			# Bought too much commodity
-			print("Bought too much! Max: %f ")
+			print("Bought too much! Max: %f " % [left_over])
 		else:
 			left_over = 0
 			

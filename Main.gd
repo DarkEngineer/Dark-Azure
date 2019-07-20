@@ -3,6 +3,7 @@ extends Node2D
 var _auction_house = AuctionHouse.new()
 
 func _ready():
+	add_child(_auction_house)
 	_auction_house.start()
 
 func _on_Timer_timeout():

@@ -19,3 +19,6 @@ func reduce(q: float):
 func print_info():
 	print("%s: %s trade: %f, %f" % [_agent.get_identity_name(), _commodity, _price, _quantity])
 
+func get_quantity():
+	return _quantity
+
