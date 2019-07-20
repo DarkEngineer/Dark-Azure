@@ -13,38 +13,6 @@ class Dependency:
 	func get_list():
 		return _list
 
-class ESList:
-	var _list: Array = []
-	var _avg: float
-	
-	func add(n):
-		_list.append(n)
-	
-	func last_average(history: int):
-		if _list.empty():
-			return 0
-		var skip = min(_list.size(), max(0, _list.size() - history))
-		var end = min(_list.size() - 1, history)
-		return average(get_range(skip,end))
-	
-	func get_range(first: int, last: int):
-		var t_arr = []
-		for i in range(first, last, 1):
-			t_arr.append(_list[i])
-		return t_arr
-	
-	func average(arr):
-		var avg: float = 0.0
-		for i in arr:
-			avg += arr[i]
-		avg /= arr.size()
-	
-	func get_size():
-		return _list.size()
-	
-	func get_list():
-		return _list
-
 class Commodity:
 	var _bids: ESList
 	var _asks: ESList
@@ -121,6 +89,9 @@ func init_commodities():
 	tool_dep.add("Food", 3)
 	tool_dep.add("Metal", 1.5)
 	add("Tool", 1, tool_dep) 
+
+func get_list() -> Dictionary:
+	return _list
 
 func get_most_profitable_profession(history: int = 10):
 	var prof: String = "invalid"
