@@ -20,14 +20,15 @@ func get_range(first: int, last: int):
 		t_arr.append(_list[i])
 	return t_arr
 
-func average(arr):
+func average(arr) -> float:
 	var avg: float = 0.0
 	for i in arr:
-		avg += arr[i]
+		avg += i
 	avg /= arr.size()
+	return avg
 
-func get_size():
+func get_size() -> int:
 	return _list.size()
 
-func get_list():
+func get_list() -> Array:
 	return _list

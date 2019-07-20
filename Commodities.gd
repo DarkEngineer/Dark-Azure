@@ -2,6 +2,7 @@ extends Node
 class_name Commodities
 
 class Dependency:
+	# list structure - name: quantity
 	var _list: Dictionary
 	
 	func add(n: String, q: float):
@@ -10,7 +11,7 @@ class Dependency:
 		_list[n] = q
 		print("New dependency %s - %d" % [n, q])
 	
-	func get_list():
+	func get_list() -> Dictionary:
 		return _list
 
 class Commodity:
@@ -36,7 +37,11 @@ class Commodity:
 		_price = _default_price
 		_dependency = d
 		_demand = 1
-		
+		_bids = ESList.new()
+		_asks = ESList.new()
+		_prices = ESList.new()
+		_trades = ESList.new()
+		_profits = ESList.new()
 		_bids.add(1)
 		_asks.add(1)
 		_prices.add(1)
@@ -60,6 +65,9 @@ class Commodity:
 
 
 var _list: Dictionary
+
+func _init():
+	init_commodities()
 
 func awake():
 	init_commodities()
@@ -93,7 +101,7 @@ func init_commodities():
 func get_list() -> Dictionary:
 	return _list
 
-func get_most_profitable_profession(history: int = 10):
+func get_most_profitable_profession(history: int = 10) -> String:
 	var prof: String = "invalid"
 	var most: float = 0
 	
@@ -107,7 +115,7 @@ func get_most_profitable_profession(history: int = 10):
 	
 	return prof
 
-func get_relative_demand(c: Commodity, history: int = 10):
+func get_relative_demand(c: Commodity, history: int = 10) -> float:
 	var average_price: float = c._prices.last_average(history)
 	var min_price: float = c._prices.min()
 	
@@ -116,7 +124,7 @@ func get_relative_demand(c: Commodity, history: int = 10):
 	
 	return relative_demand
 
-func get_hottest_good(history: int = 10):
+func get_hottest_good(history: int = 10) -> String:
 	var most_demand: String = "invalid"
 	var max_value: float = 1.1
 	var most_rd_demand = "invalid"
