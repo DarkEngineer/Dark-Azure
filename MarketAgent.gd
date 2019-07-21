@@ -166,12 +166,12 @@ var _commodities: Commodities #base implementation
 func _init(o_init_cash: float, o_buildables: PoolStringArray, o_init_num: float = 5, o_max_stock: float = 10):
 	init(o_init_cash, o_buildables, o_init_num, o_max_stock)
 """
-func init(o_init_cash: float, o_buildables: PoolStringArray, o_init_num: float = 5, o_max_stock: float = 10):
+func init(market_commodities: Commodities, o_init_cash: float, o_buildables: PoolStringArray, o_init_num: float = 5, o_max_stock: float = 10):
 	_buildables = o_buildables
 	_cash = o_init_cash
 	_previous_cash = _cash
 	_max_stock = o_max_stock
-	_commodities = Commodities.new()
+	_commodities = market_commodities
 	for buildable in _buildables:
 		if not _commodities.get_list().has(buildable):
 			printerr("commodity not recognized: %s" % [buildable])
@@ -222,20 +222,19 @@ func get_profit():
 func is_bankrupt():
 	return _cash < _bankruptcy_threshold
 
-func tick():
+func tick(market_commodities: Commodities):
 	var tax_consumed: float = 0
 	var starving: bool = false
 	
 	if _stock_pile.has("Food"):
 		_stock_pile["Food"]._quantity -= 0.1
-		var food = _stock_pile["Food"]._quantity
 		starving = false
 	
 	for entry in _stock_pile:
 		entry.tick()
 	
 	if is_bankrupt() or starving == true:
-		tax_consumed = change_profession()
+		tax_consumed = change_profession(market_commodities)
 	
 	for buildable in _buildables:
 		_stock_pile[buildable]._cost = get_cost_of(buildable)
@@ -253,7 +252,7 @@ func get_cost_of(commodity: String):
 	
 	return cost
 
-func change_profession():
+func change_profession(market_commodities: Commodities):
 	var best_good = _commodities.get_hottest_good(10)
 	var best_prof = _commodities.get_most_profitable_profession(10)
 	
@@ -267,7 +266,7 @@ func change_profession():
 	var b: PoolStringArray
 	b.append(most_demand)
 	var init_cash: float = 100
-	init(init_cash, b)
+	init(market_commodities, init_cash, b)
 	return init_cash
 
 func buy(commodity: String, quantity: float, price: float):

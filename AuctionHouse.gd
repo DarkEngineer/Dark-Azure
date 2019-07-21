@@ -1,6 +1,8 @@
 extends Node
 class_name AuctionHouse
 
+var Chart = preload("res://FlowChart/FlowChart.tscn")
+
 class Trades:
 	class SortTechnique:
 		static func sort_inc(a: Trade, b: Trade):
@@ -71,16 +73,21 @@ var tax_array = []
 
 var _track_bids: Dictionary = {}
 
+var _chart
+
 func _init():
 	_commodities = Commodities.new()
 	_ask_table = TradeTable.new()
 	_bid_table = TradeTable.new()
+	_chart = Chart.instance()
+	_chart.set_name("chart_1")
+	add_child(_chart)
 
 func start():
 	var _types = ["Food", "Wood", "Metal", "Ore", "Tool"]
 	for i in range(100):
 		var agent = MarketAgent.new()
-		init_agent(agent, _types[i])
+		init_agent(_commodities, agent, _types[randi() % 5])
 	
 	for entry in _commodities.get_list():
 		_track_bids[entry] = Dictionary()
@@ -88,7 +95,7 @@ func start():
 			_track_bids[entry][item] = 0
 		
 
-func init_agent(agent: MarketAgent, type: String):
+func init_agent(market_commodities: Commodities, agent: MarketAgent, type: String):
 	var buildables: PoolStringArray
 	var init_stock: float
 	var max_stock: float
@@ -98,7 +105,7 @@ func init_agent(agent: MarketAgent, type: String):
 	init_stock = rand_range(_init_stock / 2.0, _init_stock * 2.0)
 	max_stock = max(_init_stock, _max_stock)
 	
-	agent.init(_init_cash, buildables, init_stock, max_stock)
+	agent.init(market_commodities, _init_cash, buildables, init_stock, max_stock)
 	_agents.append(agent)
 
 func fixed_update():
@@ -187,6 +194,9 @@ func tick():
 		
 		c_list[entry].update(average_price, demand)
 		
+		if entry == "Food":
+			set_graph(_chart, entry, average_price)
+		
 
 func enact_bankruptcy():
 	for agent in _agents:
@@ -215,5 +225,6 @@ func count_stock_pile_and_cash():
 		cash_list[agent._buildables[0]].append(agent._cash)
 		total_cash += agent._cash 
 
-
-
+func set_graph(graph_obj, type = "Food", value = 0):
+	print(value)
+	graph_obj.tick(value)
