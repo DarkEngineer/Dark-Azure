@@ -8,56 +8,9 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Node",
-"class": "AuctionHouse",
-"language": "GDScript",
-"path": "res://AuctionHouse.gd"
-}, {
-"base": "Resource",
-"class": "Building",
-"language": "GDScript",
-"path": "res://PlanetTile/Field/Building.gd"
-}, {
-"base": "Node",
-"class": "Commodities",
-"language": "GDScript",
-"path": "res://Commodities.gd"
-}, {
-"base": "Node",
-"class": "ESList",
-"language": "GDScript",
-"path": "res://ESList.gd"
-}, {
-"base": "Node",
-"class": "MarketAgent",
-"language": "GDScript",
-"path": "res://MarketAgent.gd"
-}, {
-"base": "Resource",
-"class": "Structure",
-"language": "GDScript",
-"path": "res://PlanetTile/Field/Structure.gd"
-}, {
-"base": "Node",
-"class": "Trade",
-"language": "GDScript",
-"path": "res://Trade.gd"
-}, {
-"base": "Node",
-"class": "TradeSubmission",
-"language": "GDScript",
-"path": "res://TradeSubmission.gd"
-} ]
+_global_script_classes=[  ]
 _global_script_class_icons={
-"AuctionHouse": "",
-"Building": "",
-"Commodities": "",
-"ESList": "",
-"MarketAgent": "",
-"Structure": "",
-"Trade": "",
-"TradeSubmission": ""
+
 }
 
 [application]
