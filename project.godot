@@ -9,13 +9,49 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Object",
+"class": "Blueprint",
+"language": "GDScript",
+"path": "res://Planet/Blueprint.gd"
+}, {
+"base": "Object",
+"class": "BlueprintDependency",
+"language": "GDScript",
+"path": "res://Planet/BlueprintDependency.gd"
+}, {
+"base": "Object",
+"class": "Building",
+"language": "GDScript",
+"path": "res://Planet/Building.gd"
+}, {
+"base": "Object",
+"class": "Commodity",
+"language": "GDScript",
+"path": "res://Planet/Commodity.gd"
+}, {
 "base": "Area2D",
 "class": "Planet",
 "language": "GDScript",
 "path": "res://Planet/Planet.gd"
+}, {
+"base": "Building",
+"class": "ProductionBuilding",
+"language": "GDScript",
+"path": "res://Planet/ProductionBuilding.gd"
+}, {
+"base": "Object",
+"class": "ProductionQueue",
+"language": "GDScript",
+"path": "res://Planet/ProductionQueue.gd"
 } ]
 _global_script_class_icons={
-"Planet": ""
+"Blueprint": "",
+"BlueprintDependency": "",
+"Building": "",
+"Commodity": "",
+"Planet": "",
+"ProductionBuilding": "",
+"ProductionQueue": ""
 }
 
 [application]

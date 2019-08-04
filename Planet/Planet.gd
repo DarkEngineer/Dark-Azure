@@ -5,29 +5,22 @@ var _name: String = ""
 var _buildings = []
 
 
-class Commodity:
-	var _name: String setget , get_name
-	
-	func _init(n):
-		_name = n
-	
-	func get_name():
-		return _name
-
-class Building:
-	var _name: String
-	var _production = []
-	
-	func _init(n):
-		_name = n
-	
-	func add_production(c: Commodity, n: int):
-		var product = {
-			"commodity": c,
-			"quantity": n
-		}
-		_production.append(product)
-	
-
 func _ready():
-	pass
+	add_building("Mine")
+
+
+func add_building(n: String):
+	var b = ProductionBuilding.new(n)
+	b.add_blueprint(initialize_blueprint())
+	_buildings.append(b)
+	
+
+func initialize_blueprint():
+	var bd = BlueprintDependency.new()
+	bd.add("Food", 2)
+	var bp = Blueprint.new("Coal", 1, bd)
+	return bp
+
+func planet_update():
+	for b in _buildings:
+		b.update()
