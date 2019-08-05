@@ -9,6 +9,7 @@ var _quantity: float = 0
 func _init(name, owner_id = 0, quantity = 1):
 	_name = name
 	_owner_id = owner_id
+	_id = get_next_item_id()
 
 func get_next_item_id():
 	var id = global._next_item_id

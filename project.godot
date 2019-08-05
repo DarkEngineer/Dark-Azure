@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://Planet/Economy/BlueprintDependency.gd"
 }, {
 "base": "Object",
+"class": "DA_Character",
+"language": "GDScript",
+"path": "res://Characters/DA_Character.gd"
+}, {
+"base": "Object",
 "class": "DA_Item",
 "language": "GDScript",
 "path": "res://Planet/Economy/DA_Item.gd"
@@ -32,6 +37,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Blueprint": "",
 "BlueprintDependency": "",
+"DA_Character": "",
 "DA_Item": "",
 "Planet": ""
 }
