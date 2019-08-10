@@ -1,5 +1,5 @@
 extends Object
-class_name BlueprintDependency
+class_name DA_BlueprintDependency
 
 var _items = []
 

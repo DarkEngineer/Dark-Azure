@@ -10,24 +10,34 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Object",
-"class": "Blueprint",
+"class": "DA_Blueprint",
 "language": "GDScript",
-"path": "res://Planet/Economy/Blueprint.gd"
+"path": "res://Planet/Economy/DA_Blueprint.gd"
 }, {
 "base": "Object",
-"class": "BlueprintDependency",
+"class": "DA_BlueprintDependency",
 "language": "GDScript",
-"path": "res://Planet/Economy/BlueprintDependency.gd"
+"path": "res://Planet/Economy/DA_BlueprintDependency.gd"
 }, {
 "base": "Object",
 "class": "DA_Character",
 "language": "GDScript",
 "path": "res://Characters/DA_Character.gd"
 }, {
+"base": "DA_Item",
+"class": "DA_Commodity",
+"language": "GDScript",
+"path": "res://Planet/Economy/DA_Commodity.gd"
+}, {
 "base": "Object",
 "class": "DA_Item",
 "language": "GDScript",
 "path": "res://Planet/Economy/DA_Item.gd"
+}, {
+"base": "Resource",
+"class": "DA_RawMineral",
+"language": "GDScript",
+"path": "res://Resources/RawMineral.gd"
 }, {
 "base": "Area2D",
 "class": "Planet",
@@ -35,10 +45,12 @@ _global_script_classes=[ {
 "path": "res://Planet/Planet.gd"
 } ]
 _global_script_class_icons={
-"Blueprint": "",
-"BlueprintDependency": "",
+"DA_Blueprint": "",
+"DA_BlueprintDependency": "",
 "DA_Character": "",
+"DA_Commodity": "",
 "DA_Item": "",
+"DA_RawMineral": "",
 "Planet": ""
 }
 
