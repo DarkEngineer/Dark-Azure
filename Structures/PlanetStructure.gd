@@ -6,8 +6,7 @@ enum STRUCTURE_TYPE {
 	INDUSTRIAL,
 	MILITARY,
 	RELIGION,
-	CRIMINAL,
-	ECONOMY
+	CRIMINAL
 }
 
 export (String) var _name: String = "Default Structure"

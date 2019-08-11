@@ -6,4 +6,4 @@
 script = ExtResource( 1 )
 _name = "Farm"
 _name_id = "farm"
-_structure_type = 5
+_structure_type = 1
