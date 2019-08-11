@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "DA_Blueprint",
 "language": "GDScript",
-"path": "res://Planet/Economy/DA_Blueprint.gd"
+"path": "res://Economy/DA_Blueprint.gd"
 }, {
 "base": "Object",
 "class": "DA_BlueprintDependency",
 "language": "GDScript",
-"path": "res://Planet/Economy/DA_BlueprintDependency.gd"
+"path": "res://Economy/DA_BlueprintDependency.gd"
 }, {
 "base": "Object",
 "class": "DA_Character",
@@ -27,22 +27,27 @@ _global_script_classes=[ {
 "base": "DA_Item",
 "class": "DA_Commodity",
 "language": "GDScript",
-"path": "res://Planet/Economy/DA_Commodity.gd"
+"path": "res://Economy/DA_Commodity.gd"
 }, {
 "base": "Object",
 "class": "DA_Item",
 "language": "GDScript",
-"path": "res://Planet/Economy/DA_Item.gd"
+"path": "res://Economy/DA_Item.gd"
 }, {
 "base": "Resource",
-"class": "DA_RawMineral",
+"class": "DA_RawItem",
 "language": "GDScript",
-"path": "res://Resources/RawMineral.gd"
+"path": "res://Resources/RawItem.gd"
 }, {
 "base": "Area2D",
 "class": "Planet",
 "language": "GDScript",
 "path": "res://Planet/Planet.gd"
+}, {
+"base": "Resource",
+"class": "PlanetStructure",
+"language": "GDScript",
+"path": "res://Structures/PlanetStructure.gd"
 } ]
 _global_script_class_icons={
 "DA_Blueprint": "",
@@ -50,8 +55,9 @@ _global_script_class_icons={
 "DA_Character": "",
 "DA_Commodity": "",
 "DA_Item": "",
-"DA_RawMineral": "",
-"Planet": ""
+"DA_RawItem": "",
+"Planet": "",
+"PlanetStructure": ""
 }
 
 [application]

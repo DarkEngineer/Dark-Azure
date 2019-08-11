@@ -1,10 +1,15 @@
 extends DA_Item
 class_name DA_Commodity
 
+var COMMODITY_TYPE = DA_RawItem.COMMODITY_TYPE
+
 var _type = null
 
+func _init(n, n_id, type).(n, n_id):
+	set_type(type)
+
 func set_type(type) -> bool:
-	if COMMODITY_TYPE.has(type):
+	if COMMODITY_TYPE.values().has(type):
 		_type = type
 		return true
 	return false

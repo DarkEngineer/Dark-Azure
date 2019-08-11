@@ -5,7 +5,7 @@ var _items = []
 
 func add(n, q):
 	var obj = {
-		"name": n,
+		"name_id": n,
 		"quantity": q
 	}
 	_items.append(obj)
