@@ -8,62 +8,9 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Object",
-"class": "DA_Blueprint",
-"language": "GDScript",
-"path": "res://Economy/DA_Blueprint.gd"
-}, {
-"base": "Object",
-"class": "DA_BlueprintDependency",
-"language": "GDScript",
-"path": "res://Economy/DA_BlueprintDependency.gd"
-}, {
-"base": "Object",
-"class": "DA_Character",
-"language": "GDScript",
-"path": "res://Characters/DA_Character.gd"
-}, {
-"base": "DA_Item",
-"class": "DA_Commodity",
-"language": "GDScript",
-"path": "res://Economy/DA_Commodity.gd"
-}, {
-"base": "Object",
-"class": "DA_Item",
-"language": "GDScript",
-"path": "res://Economy/DA_Item.gd"
-}, {
-"base": "Resource",
-"class": "DA_RawItem",
-"language": "GDScript",
-"path": "res://Resources/RawItem.gd"
-}, {
-"base": "Area2D",
-"class": "Planet",
-"language": "GDScript",
-"path": "res://Planet/Planet.gd"
-}, {
-"base": "Resource",
-"class": "R_Structure",
-"language": "GDScript",
-"path": "res://Structures/R_Structure.gd"
-}, {
-"base": "Resource",
-"class": "R_StructureBlueprint",
-"language": "GDScript",
-"path": "res://StructureBlueprints/R_StructureBlueprint.gd"
-} ]
+_global_script_classes=[  ]
 _global_script_class_icons={
-"DA_Blueprint": "",
-"DA_BlueprintDependency": "",
-"DA_Character": "",
-"DA_Commodity": "",
-"DA_Item": "",
-"DA_RawItem": "",
-"Planet": "",
-"R_Structure": "",
-"R_StructureBlueprint": ""
+
 }
 
 [application]
