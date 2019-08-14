@@ -45,14 +45,14 @@ _global_script_classes=[ {
 "path": "res://Planet/Planet.gd"
 }, {
 "base": "Resource",
-"class": "PlanetStructure",
+"class": "R_Structure",
 "language": "GDScript",
-"path": "res://Structures/PlanetStructure.gd"
+"path": "res://Structures/R_Structure.gd"
 }, {
 "base": "Resource",
-"class": "StructureBlueprint",
+"class": "R_StructureBlueprint",
 "language": "GDScript",
-"path": "res://StructureBlueprints/StructureBlueprint.gd"
+"path": "res://StructureBlueprints/R_StructureBlueprint.gd"
 } ]
 _global_script_class_icons={
 "DA_Blueprint": "",
@@ -62,8 +62,8 @@ _global_script_class_icons={
 "DA_Item": "",
 "DA_RawItem": "",
 "Planet": "",
-"PlanetStructure": "",
-"StructureBlueprint": ""
+"R_Structure": "",
+"R_StructureBlueprint": ""
 }
 
 [application]

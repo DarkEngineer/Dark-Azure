@@ -1,5 +1,5 @@
 extends Resource
-class_name PlanetStructure
+class_name R_Structure
 
 enum STRUCTURE_TYPE {
 	SOCIAL,
