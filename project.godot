@@ -8,9 +8,32 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Object",
+"class": "DA_Company",
+"language": "GDScript",
+"path": "res://Company/DA_Company.gd"
+}, {
+"base": "Object",
+"class": "DA_Government",
+"language": "GDScript",
+"path": "res://Government/DA_Government.gd"
+}, {
+"base": "Object",
+"class": "DA_Population",
+"language": "GDScript",
+"path": "res://Population/DA_Population.gd"
+}, {
+"base": "Object",
+"class": "DA_Syndicate",
+"language": "GDScript",
+"path": "res://Syndicate/DA_Syndicate.gd"
+} ]
 _global_script_class_icons={
-
+"DA_Company": "",
+"DA_Government": "",
+"DA_Population": "",
+"DA_Syndicate": ""
 }
 
 [application]
