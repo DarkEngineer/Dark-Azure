@@ -2,24 +2,30 @@ extends Object
 class_name DA_Population
 
 var _quantity: float = 0 # how big population is
-var _workforce: int = 0 # how many are working
-var _funds: float = 0 # how much money there is for population
-var _inventory: float = 0
-var _consumption: float = 0
+var _growth_rate: float = 0.01
 
-func _init(q, f, c):
-	add_quantity(q)
-	add_funds(f)
-	set_consumption(c)
+signal month_changed(data)
 
-func add_workforce(amount: int):
-	_workforce += amount
+#References
+var _planet_ref
 
-func add_funds(amount: float):
-	_funds += amount
+func _init(q):
+	_quantity = q
+	global.connect("month_passed", self, "month_end")
 
-func add_quantity(amount: float):
-	_quantity += amount
+func grow_population():
+	var new_pop = _quantity * _growth_rate
+	_quantity += new_pop
 
-func set_consumption(amount: float):
-	_consumption = amount
+func create_data_for_ui() -> Dictionary:
+	var data = {
+		"pop_quantity": _quantity,
+		"growth_rate": _growth_rate,
+		"consumption_value": 0
+	}
+	return data
+
+func month_end():
+	grow_population()
+	var pop_data = create_data_for_ui()
+	emit_signal("month_changed", pop_data)

@@ -8,7 +8,10 @@ var _products: float = 0
 var _product_price: float = 0
 var _population_workers: DA_Population
 
-func _init(f, w_max, p, p_price, pop):
+var _planet_ref
+
+func _init(planet_ref, f, w_max, p, p_price, pop):
+	_planet_ref = planet_ref
 	add_funds(f)
 	_workers_max = w_max
 	produce(p)
@@ -37,3 +40,9 @@ func produce(amount):
 func sell_product(amount):
 	_products -= amount
 	return amount
+
+func get_products():
+	return _products
+
+func get_product_price():
+	return _product_price

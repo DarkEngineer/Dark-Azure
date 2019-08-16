@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://PlanetInterface/PlanetGUI.gd" type="Script" id=1]
+
+[node name="PlanetGUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Population" type="PanelContainer" parent="."]
+margin_right = 250.0
+margin_bottom = 230.0
+
+[node name="Grid" type="GridContainer" parent="Population"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 243.0
+margin_bottom = 223.0
+columns = 2
+
+[node name="PopT" type="Label" parent="Population/Grid"]
+margin_right = 89.0
+margin_bottom = 14.0
+text = "Pop Quantity:"
+
+[node name="PopValue" type="Label" parent="Population/Grid"]
+margin_left = 93.0
+margin_right = 137.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="GrowthT" type="Label" parent="Population/Grid"]
+margin_top = 18.0
+margin_right = 89.0
+margin_bottom = 32.0
+text = "Growth Rate:"
+
+[node name="GrowthValue" type="Label" parent="Population/Grid"]
+margin_left = 93.0
+margin_top = 18.0
+margin_right = 137.0
+margin_bottom = 32.0
+text = "1%"
+
+[node name="ConsT" type="Label" parent="Population/Grid"]
+margin_top = 36.0
+margin_right = 89.0
+margin_bottom = 50.0
+text = "Consumption:"
+
+[node name="ConsValue" type="Label" parent="Population/Grid"]
+margin_left = 93.0
+margin_top = 36.0
+margin_right = 137.0
+margin_bottom = 50.0
+text = "0 units"

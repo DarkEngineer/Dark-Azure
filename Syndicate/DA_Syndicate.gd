@@ -4,7 +4,10 @@ class_name DA_Syndicate
 var _funds: float = 0
 var _gangsters: int = 0
 
-func _init(f = 0, g = 1):
+var _planet_ref
+
+func _init(planet_ref, f = 0, g = 1):
+	_planet_ref = planet_ref
 	_funds = f
 	recruit(g)
 

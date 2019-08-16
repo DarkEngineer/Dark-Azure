@@ -5,8 +5,12 @@ var _funds: float = 0
 var _workers: int = 0
 var _tax_rate: float = 0
 
-func _init(funds, tax_rate):
-	pass
+var _planet_ref
+
+func _init(planet_ref, funds, tax_rate):
+	_planet_ref = planet_ref
+	_funds = funds
+	_tax_rate = tax_rate
 
 func add_funds(amount):
 	_funds += amount
