@@ -13,6 +13,8 @@ func _input(event):
 				zoom_at_point(zoom_step, mouse_position)
 			elif event.button_index == BUTTON_WHEEL_DOWN:
 				zoom_at_point(1 / zoom_step,mouse_position)
+			
+			set_to_global_var()
 
 func zoom_at_point(zoom_change, point):
 	var c0 = global_position # camera position
@@ -24,3 +26,6 @@ func zoom_at_point(zoom_change, point):
 	c1 = c0 + (-0.5 * v0 + point)*(z0 - z1)
 	zoom = z1
 	global_position = c1
+
+func set_to_global_var():
+	global._main_camera_current_zoom = get_zoom().length()
