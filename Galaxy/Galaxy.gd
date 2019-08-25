@@ -3,17 +3,21 @@ extends Node2D
 var Galaxy_Star = preload("res://Galaxy/GalaxyStar/GalaxyStar.tscn")
 var Galaxy_Geometrics = preload("res://Galaxy/GalaxyGeometrics/GalaxyGeometrics.tscn")
 var Galaxy_UI = preload("res://GalaxyUI/GalaxyUI.tscn")
+var Galaxy_Ship = preload("res://GalaxyUI/GalaxyShip.tscn")
 
 const DEFAULT_STARS_AMOUNT = 200
 const DEFAULT_RANGE: float = 15000.0
 const DEFAULT_DISTANCE_BETWEEN_STARS: float = 450.0
 
 var _next_star_id: int = 1
+var _current_active_galaxy_ships = 0
+
 
 func _ready():
 	create_galaxy()
 	create_galaxy_geometrics()
 	create_galaxy_ui()
+	create_galaxy_ship()
 
 func set_star_id():
 	var star_id = _next_star_id
@@ -59,3 +63,18 @@ func create_galaxy_ui():
 	g_ui.set_name("GalaxyUI")
 	add_child(g_ui)
 	g_ui.create_star_systems_text()
+
+func increase_galaxy_ship_count():
+	_current_active_galaxy_ships += 1
+
+func decrease_galaxy_ship_count():
+	_current_active_galaxy_ships -= 1
+
+func get_galaxy_ship_count():
+	return _current_active_galaxy_ships
+
+func create_galaxy_ship():
+	var g_ship = Galaxy_Ship.instance()
+	increase_galaxy_ship_count()
+	g_ship.set_name("Galaxy_Ship_%d" % [get_galaxy_ship_count()])
+	add_child(g_ship)
