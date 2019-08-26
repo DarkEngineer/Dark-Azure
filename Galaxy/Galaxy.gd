@@ -12,6 +12,7 @@ const DEFAULT_DISTANCE_BETWEEN_STARS: float = 450.0
 var _next_star_id: int = 1
 var _current_active_galaxy_ships = 0
 
+var _selected = []
 
 func _ready():
 	create_galaxy()

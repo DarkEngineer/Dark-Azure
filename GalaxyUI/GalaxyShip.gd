@@ -3,6 +3,10 @@ extends Area2D
 var _default_speed = 150
 var _destination = null
 
+var _selected = false
+
+var _galaxy_ref = null
+
 func _ready():
 	pass
 
@@ -16,6 +20,12 @@ func _physics_process(delta):
 			var new_pos = get_position() + move_to(_destination) * delta
 			set_position(new_pos)
 
+func set_galaxy_ref(g_ref):
+	_galaxy_ref = g_ref
+
+func set_to_galaxy_signals():
+	pass
+
 func move_to(destination):
 	var distance_vector = destination - get_position()
 	var distance_norm = distance_vector.normalized()
@@ -28,4 +38,10 @@ func rotate_to_travel_path(vector_norm: Vector2):
 	var final_rotation = vector_norm.angle()
 	var diff_rotation = final_rotation - t_rot
 	rotate(diff_rotation)
-	
+
+func check_select():
+	var c_1 = $SelectCircle1
+	if _selected and not c_1.is_visible_in_tree():
+		c_1.show()
+	elif not _selected and c_1.is_visible_in_tree():
+		c_1.hide()
