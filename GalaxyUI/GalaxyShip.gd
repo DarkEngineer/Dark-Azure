@@ -7,12 +7,10 @@ var _selected = false
 
 var _galaxy_ref = null
 
+signal galaxy_ship_selected(ship)
+
 func _ready():
 	pass
-
-func _input(event):
-	if event.is_action_pressed("left_mouse"):
-		_destination = get_global_mouse_position()
 
 func _physics_process(delta):
 	if _destination != null:
@@ -21,10 +19,19 @@ func _physics_process(delta):
 			set_position(new_pos)
 
 func set_galaxy_ref(g_ref):
+	"""
+	Set reference to galaxy object
+	"""
 	_galaxy_ref = g_ref
+	set_signals_to_galaxy()
 
-func set_to_galaxy_signals():
-	pass
+func set_signals_to_galaxy():
+	var err = connect("galaxy_ship_selected", _galaxy_ref, "_on_galaxy_ship_selected")
+	if err == 0:
+		return true
+	else:
+		printerr(err)
+		return false
 
 func move_to(destination):
 	var distance_vector = destination - get_position()
@@ -45,3 +52,10 @@ func check_select():
 		c_1.show()
 	elif not _selected and c_1.is_visible_in_tree():
 		c_1.hide()
+
+func _on_GalaxyShip_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed("left_mouse"):
+		_selected = true
+		
+		emit_signal("galaxy_ship_selected", self)
+		check_select()

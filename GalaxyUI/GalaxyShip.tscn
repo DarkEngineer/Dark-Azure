@@ -17,3 +17,4 @@ polygon = PoolVector2Array( 24.1986, 0.260109, -17.4883, -13.8569, -17.4883, 14.
 [node name="SelectCircle1" type="Sprite" parent="."]
 visible = false
 texture = ExtResource( 3 )
+[connection signal="input_event" from="." to="." method="_on_GalaxyShip_input_event"]

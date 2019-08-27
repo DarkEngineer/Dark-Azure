@@ -14,6 +14,9 @@ var _current_active_galaxy_ships = 0
 
 var _selected = []
 
+# References
+var _galaxy_geometrics_ref = null
+
 func _ready():
 	create_galaxy()
 	create_galaxy_geometrics()
@@ -57,6 +60,7 @@ func check_star_distance_from_others(new_position: Vector2, distance_between_sta
 func create_galaxy_geometrics():
 	var g_geometry = Galaxy_Geometrics.instance()
 	g_geometry.set_name("GalaxyGeometrics")
+	_galaxy_geometrics_ref = g_geometry
 	add_child(g_geometry)
 
 func create_galaxy_ui():
@@ -79,3 +83,6 @@ func create_galaxy_ship():
 	increase_galaxy_ship_count()
 	g_ship.set_name("Galaxy_Ship_%d" % [get_galaxy_ship_count()])
 	add_child(g_ship)
+
+func _on_galaxy_ship_selected(ship):
+	_selected.append(ship)
