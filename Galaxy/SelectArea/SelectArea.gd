@@ -9,9 +9,11 @@ var _details = {
 	"height": 0
 }
 
-onready var _shape = $Shape
+onready var _c_shape = $Shape
 var _start_mouse_position: Vector2
 var _select_started: bool = false
+
+signal objects_selected(obj_array)
 
 func _ready():
 	pass
@@ -36,9 +38,10 @@ func on_action_release():
 	var tr = Vector2(br.x, tl.y)
 	var bl = Vector2(tl.x, br.y)
 	
-	set_shape_corner_points(tl, tr, bl, br)
+	set_col_shape_corner_points(tl, tr, bl, br)
 	
 	set_center()
+	set_shape_properties(_details.width, _details.height)
 	
 
 func find_center() -> Vector2:
@@ -57,7 +60,7 @@ func set_center():
 func set_area_position(pos: Vector2):
 	set_position(pos)
 
-func set_shape_corner_points(tl, tr, bl, br):
+func set_col_shape_corner_points(tl, tr, bl, br):
 	_details.top_left = tl
 	_details.top_right = tr
 	_details.bottom_left = bl
@@ -66,3 +69,7 @@ func set_shape_corner_points(tl, tr, bl, br):
 func set_length_properties(w, h):
 	_details.width = w
 	_details.height = h
+
+func set_shape_properties(w: float, h: float):
+	var shape = _c_shape.get_shape()
+	shape.set_extents(Vector2(w / 2.0, h / 2.0))

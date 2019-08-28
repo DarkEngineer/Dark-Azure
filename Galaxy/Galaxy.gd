@@ -4,6 +4,7 @@ var Galaxy_Star = preload("res://Galaxy/GalaxyStar/GalaxyStar.tscn")
 var Galaxy_Geometrics = preload("res://Galaxy/GalaxyGeometrics/GalaxyGeometrics.tscn")
 var Galaxy_UI = preload("res://GalaxyUI/GalaxyUI.tscn")
 var Galaxy_Ship = preload("res://GalaxyUI/GalaxyShip.tscn")
+var Select_Area = preload("res://Galaxy/SelectArea/SelectArea.tscn")
 
 const DEFAULT_STARS_AMOUNT = 200
 const DEFAULT_RANGE: float = 15000.0
@@ -22,6 +23,7 @@ func _ready():
 	create_galaxy_geometrics()
 	create_galaxy_ui()
 	create_galaxy_ship()
+	create_selection_area_object()
 
 func set_star_id():
 	var star_id = _next_star_id
@@ -83,6 +85,15 @@ func create_galaxy_ship():
 	increase_galaxy_ship_count()
 	g_ship.set_name("Galaxy_Ship_%d" % [get_galaxy_ship_count()])
 	add_child(g_ship)
+
+func create_selection_area_object():
+	var s_area = Select_Area.instance()
+	s_area.set_name("SelectArea")
+	s_area.connect("objects_selected", self, "_on_objects_selected")
+	add_child(s_area)
+
+func _on_object_selected(obj_array):
+	print(obj_array)
 
 func _on_galaxy_ship_selected(ship):
 	_selected.append(ship)
