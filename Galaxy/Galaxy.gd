@@ -92,7 +92,7 @@ func create_selection_area_object():
 	s_area.connect("objects_selected", self, "_on_objects_selected")
 	add_child(s_area)
 
-func _on_object_selected(obj_array):
+func _on_objects_selected(obj_array):
 	print(obj_array)
 
 func _on_galaxy_ship_selected(ship):
