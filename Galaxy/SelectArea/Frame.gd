@@ -6,7 +6,7 @@ var _frame_coords: Dictionary = {
 	"height": null
 }
 
-var _rect_color = Color(0.3, 0.47, 0.7, 0.69)
+#var _rect_color = Color(0.3, 0.47, 0.7, 0.69)
 onready var _color_rect = $Rect
 
 var _continue_frame_drawing = false

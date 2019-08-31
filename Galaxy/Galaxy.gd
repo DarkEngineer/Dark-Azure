@@ -13,12 +13,13 @@ const DEFAULT_DISTANCE_BETWEEN_STARS: float = 450.0
 var _next_star_id: int = 1
 var _current_active_galaxy_ships = 0
 
-var _selected = []
+var _selected = [] setget , get_selected
 
 # References
 var _galaxy_geometrics_ref = null
 
 func _ready():
+	randomize()
 	create_galaxy()
 	create_galaxy_geometrics()
 	create_galaxy_ui()
@@ -50,11 +51,12 @@ func create_galaxy():
 				star.set_id(new_id)
 				add_child(star)
 
-func check_star_distance_from_others(new_position: Vector2, distance_between_stars: float):
+func check_star_distance_from_others(new_position: Vector2, 
+		distance_between_stars: float = DEFAULT_DISTANCE_BETWEEN_STARS):
 	var g_stars = get_tree().get_nodes_in_group("Galaxy Stars")
 	for star in g_stars:
 		var distance = new_position - star.get_position()
-		if distance.length() < DEFAULT_DISTANCE_BETWEEN_STARS:
+		if distance.length() < distance_between_stars:
 			return false
 	
 	return true
@@ -86,14 +88,46 @@ func create_galaxy_ship():
 	g_ship.set_name("Galaxy_Ship_%d" % [get_galaxy_ship_count()])
 	add_child(g_ship)
 
+func get_selected():
+	return _selected.duplicate()
+
 func create_selection_area_object():
 	var s_area = Select_Area.instance()
 	s_area.set_name("SelectArea")
 	s_area.connect("objects_selected", self, "_on_objects_selected")
 	add_child(s_area)
 
+func filter_selection(selected_array: Array, current_selection_array: Array):
+	var to_unselection = []
+	var duplicates = []
+	var new_selection = []
+	for new_obj in current_selection_array:
+		if selected_array.has(new_obj):
+			duplicates.append(new_obj)
+			selected_array.erase(new_obj)
+		else:
+			new_selection.append(new_obj)
+	to_unselection = selected_array
+	for unselect_obj in to_unselection:
+		unselect_obj.set_deselected()
+
+func filter_object_selection(obj_array):
+	var filtered_objects = []
+	for obj in obj_array:
+		var obj_groups = obj.get_groups()
+		for group in obj_groups:
+			if global._galaxy_select_filter.basic.has(group):
+				filtered_objects.append(obj)
+				break
+	print(filtered_objects)
+	return filtered_objects
+
 func _on_objects_selected(obj_array):
-	print(obj_array)
+	var filtered_obj_array = filter_object_selection(obj_array)
+	filter_selection(get_selected(), obj_array)
 
 func _on_galaxy_ship_selected(ship):
 	_selected.append(ship)
+
+func _on_galaxy_ship_deselected(ship):
+	_selected.erase(ship)

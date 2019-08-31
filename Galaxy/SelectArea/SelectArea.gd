@@ -18,7 +18,9 @@ onready var _overlap_timer = $OverlappingResponseTimer
 var _start_mouse_position: Vector2
 var _select_started: bool = false
 
-signal objects_selected(obj_array)
+var _selection_mode: int = global.SELECTION_MODE.NONE
+
+signal objects_selected(obj_array, selection_mode)
 
 func _ready():
 	pass
@@ -121,6 +123,10 @@ func set_shape_properties(w: float, h: float):
 	var shape = _c_shape.get_shape()
 	shape.set_extents(Vector2(w / 2.0, h / 2.0))
 
+func set_selection_mode():
+	"""
+	set if selection is for single object or multiple to choose proper filters
+	"""
 
 func _on_OverlappingResponseTimer_timeout():
 	emit_signal("objects_selected", get_overlapping_areas())

@@ -8,6 +8,7 @@ var _selected = false
 var _galaxy_ref = null
 
 signal galaxy_ship_selected(ship)
+signal galaxy_ship_deselected(ship)
 
 func _ready():
 	pass
@@ -26,11 +27,13 @@ func set_galaxy_ref(g_ref):
 	set_signals_to_galaxy()
 
 func set_signals_to_galaxy():
-	var err = connect("galaxy_ship_selected", _galaxy_ref, "_on_galaxy_ship_selected")
-	if err == 0:
+	var err_array = []
+	err_array.append(connect("galaxy_ship_selected", _galaxy_ref, "_on_galaxy_ship_selected"))
+	err_array.append(connect("galaxy_ship_deselected", _galaxy_ref, "_on_galaxy_ship_deselected"))
+	if err_array.max() == 0:
 		return true
 	else:
-		printerr(err)
+		printerr(err_array)
 		return false
 
 func move_to(destination):
@@ -53,9 +56,14 @@ func check_select():
 	elif not _selected and c_1.is_visible_in_tree():
 		c_1.hide()
 
-func _on_GalaxyShip_input_event(viewport, event, shape_idx):
-	if event.is_action_pressed("left_mouse"):
-		_selected = true
-		
-		emit_signal("galaxy_ship_selected", self)
-		check_select()
+func set_selected():
+	_selected = true
+	
+	emit_signal("galaxy_ship_selected", self)
+	check_select()
+
+func set_deselected():
+	_selected = false
+	
+	emit_signal("galaxy_ship_deselected", self)
+	check_select()
