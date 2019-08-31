@@ -12,6 +12,7 @@ var _details: Dictionary = {
 } setget , get_details
 
 onready var _c_shape = $Shape
+
 onready var _overlap_timer = $OverlappingResponseTimer
 
 var _start_mouse_position: Vector2
@@ -58,6 +59,7 @@ func on_action_release():
 	set_shape_properties(_details.width, _details.height)
 	
 	_overlap_timer.start()
+	show()
 
 func find_center() -> Vector2:
 	var length_properties = find_length_properties()
@@ -119,5 +121,7 @@ func set_shape_properties(w: float, h: float):
 	var shape = _c_shape.get_shape()
 	shape.set_extents(Vector2(w / 2.0, h / 2.0))
 
+
 func _on_OverlappingResponseTimer_timeout():
 	emit_signal("objects_selected", get_overlapping_areas())
+	hide()

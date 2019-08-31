@@ -19,8 +19,13 @@ process_mode = 0
 wait_time = 0.1
 one_shot = true
 
-[node name="DrawLayer" type="CanvasLayer" parent="."]
+[node name="FrameLayer" type="CanvasLayer" parent="."]
 
-[node name="Frame" type="Node2D" parent="DrawLayer"]
+[node name="Frame" type="Node2D" parent="FrameLayer"]
 script = ExtResource( 2 )
+
+[node name="Rect" type="ColorRect" parent="FrameLayer/Frame"]
+margin_right = 40.0
+margin_bottom = 40.0
+color = Color( 0.3, 0.47, 0.7, 0.69 )
 [connection signal="timeout" from="OverlappingResponseTimer" to="." method="_on_OverlappingResponseTimer_timeout"]
