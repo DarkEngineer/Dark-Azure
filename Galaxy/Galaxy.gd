@@ -122,7 +122,7 @@ func filter_object_selection(obj_array):
 	print(filtered_objects)
 	return filtered_objects
 
-func _on_objects_selected(obj_array):
+func _on_objects_selected(obj_array, selection_mode):
 	var filtered_obj_array = filter_object_selection(obj_array)
 	filter_selection(get_selected(), obj_array)
 

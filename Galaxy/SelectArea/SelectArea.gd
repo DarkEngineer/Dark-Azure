@@ -59,9 +59,10 @@ func on_action_release():
 	
 	set_center()
 	set_shape_properties(_details.width, _details.height)
+	set_selection_mode()
 	
-	_overlap_timer.start()
 	show()
+	_overlap_timer.start()
 
 func find_center() -> Vector2:
 	var length_properties = find_length_properties()
@@ -127,7 +128,15 @@ func set_selection_mode():
 	"""
 	set if selection is for single object or multiple to choose proper filters
 	"""
+	if abs(get_details().width) <= 5.0 and abs(get_details().height) <= 5.0:
+		_selection_mode = global.SELECTION_MODE.SINGLE	
+	else:
+		_selection_mode = global.SELECTION_MODE.MULTIPLE
+
+func reset_selection_mode():
+	_selection_mode = global.SELECTION_MODE.NONE
 
 func _on_OverlappingResponseTimer_timeout():
-	emit_signal("objects_selected", get_overlapping_areas())
+	emit_signal("objects_selected", get_overlapping_areas(), _selection_mode)
+	reset_selection_mode()
 	hide()
