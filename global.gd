@@ -9,9 +9,12 @@ enum SELECTION_MODE {
 }
 
 var _galaxy_select_filter = {
-	"basic": ["Galaxy Ships"],
-	"single": ["Galaxy Ships", "Galaxy Stars"]
+	"single": ["Galaxy Ships", "Galaxy Stars"],
+	"multiple": ["Galaxy Ships"]
 }
 
 func _ready():
 	pass
+
+func get_select_filter():
+	return _galaxy_select_filter.duplicate()

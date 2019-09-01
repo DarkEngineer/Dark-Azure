@@ -97,6 +97,25 @@ func create_selection_area_object():
 	s_area.connect("objects_selected", self, "_on_objects_selected")
 	add_child(s_area)
 
+func filter_by_selection_mode(obj_array, selection_mode) -> Array:
+	var filtered_objects = []
+	var single_groups: Array = global.get_select_filter().single
+	var multi_groups: Array = global.get_select_filter().multiple
+	if selection_mode == global.SELECTION_MODE.SINGLE:
+		for obj in obj_array:
+			filter_selection_mode_object(obj, filtered_objects, single_groups)
+	elif selection_mode == global.SELECTION_MODE.MULTIPLE:
+		for obj in obj_array:
+			filter_selection_mode_object(obj, filtered_objects, multi_groups)
+	return filtered_objects
+
+func filter_selection_mode_object(obj, filtered_obj_array, selection_mode_groups: Array):
+	var group_array = obj.get_groups()
+	for group in group_array:
+		if selection_mode_groups.has(group):
+			filtered_obj_array.append(obj)
+			break
+
 func filter_selection(selected_array: Array, current_selection_array: Array):
 	var to_unselection = []
 	var duplicates = []
@@ -113,14 +132,6 @@ func filter_selection(selected_array: Array, current_selection_array: Array):
 
 func filter_object_selection(obj_array):
 	var filtered_objects = []
-	for obj in obj_array:
-		var obj_groups = obj.get_groups()
-		for group in obj_groups:
-			if global._galaxy_select_filter.basic.has(group):
-				filtered_objects.append(obj)
-				break
-	print(filtered_objects)
-	return filtered_objects
 
 func _on_objects_selected(obj_array, selection_mode):
 	var filtered_obj_array = filter_object_selection(obj_array)
