@@ -11,8 +11,13 @@ var _galaxy_geometrics_ref = null
 signal galaxy_ship_selected(ship_obj)
 signal galaxy_ship_deselected(ship_obj)
 
-signal galaxy_ship_started_travel(ship_obj)
+signal galaxy_ship_started_travel(ship_obj,)
 signal galaxy_ship_aborted_travel(ship_obj)
+
+enum STATES {
+	IDLE,
+	MOVING
+}
 
 func _ready():
 	pass
@@ -35,7 +40,7 @@ func set_galaxy_geometrics_ref(g_geo_ref):
 	Set reference to galaxy geometrics object
 	"""
 	_galaxy_geometrics_ref = g_geo_ref
-	
+	set_signals_to_galaxy_geometrics()
 
 func set_signals_to_galaxy():
 	var err_array = []
@@ -89,3 +94,9 @@ func set_deselected():
 	
 	emit_signal("galaxy_ship_deselected", self)
 	check_select()
+
+func set_start_galaxy_travel(galaxy_travel: GalaxyTravel):
+	emit_signal("galaxy_ship_started_travel", galaxy_travel)
+
+func set_aborted_galaxy_travel(galaxy_travel: GalaxyTravel):
+	emit_signal("galaxy_ship_aborted_travel", galaxy_travel)
