@@ -129,13 +129,15 @@ func filter_selection(selected_array: Array, current_selection_array: Array):
 	to_unselection = selected_array
 	for unselect_obj in to_unselection:
 		unselect_obj.set_deselected()
+	
+	print(new_selection)
 
-func filter_object_selection(obj_array):
-	var filtered_objects = []
+func filter_object_selection(obj_array, selection_mode):
+	return filter_by_selection_mode(obj_array, selection_mode)
 
 func _on_objects_selected(obj_array, selection_mode):
-	var filtered_obj_array = filter_object_selection(obj_array)
-	filter_selection(get_selected(), obj_array)
+	var filtered_obj_array = filter_object_selection(obj_array, selection_mode)
+	filter_selection(get_selected(), filtered_obj_array)
 
 func _on_galaxy_ship_selected(ship):
 	_selected.append(ship)

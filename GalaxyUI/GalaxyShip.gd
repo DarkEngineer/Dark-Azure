@@ -6,9 +6,13 @@ var _destination = null
 var _selected = false
 
 var _galaxy_ref = null
+var _galaxy_geometrics_ref = null
 
-signal galaxy_ship_selected(ship)
-signal galaxy_ship_deselected(ship)
+signal galaxy_ship_selected(ship_obj)
+signal galaxy_ship_deselected(ship_obj)
+
+signal galaxy_ship_started_travel(ship_obj)
+signal galaxy_ship_aborted_travel(ship_obj)
 
 func _ready():
 	pass
@@ -26,6 +30,13 @@ func set_galaxy_ref(g_ref):
 	_galaxy_ref = g_ref
 	set_signals_to_galaxy()
 
+func set_galaxy_geometrics_ref(g_geo_ref):
+	"""
+	Set reference to galaxy geometrics object
+	"""
+	_galaxy_geometrics_ref = g_geo_ref
+	
+
 func set_signals_to_galaxy():
 	var err_array = []
 	err_array.append(connect("galaxy_ship_selected", _galaxy_ref, "_on_galaxy_ship_selected"))
@@ -33,7 +44,18 @@ func set_signals_to_galaxy():
 	if err_array.max() == 0:
 		return true
 	else:
-		printerr(err_array)
+		printerr(err_array.max())
+		return false
+
+func set_signals_to_galaxy_geometrics():
+	var err_array = []
+	#signals to galaxy geometrics here
+	err_array.append(connect("galaxy_ship_started_travel", _galaxy_geometrics_ref, "_on_galaxy_ship_started_travel"))
+	err_array.append(connect("galaxy_ship_aborted_travel", _galaxy_geometrics_ref, "_on_galaxy_ship_aborted_travel"))
+	if err_array.max() == 0:
+		return true
+	else:
+		printerr(err_array.max())
 		return false
 
 func move_to(destination):
