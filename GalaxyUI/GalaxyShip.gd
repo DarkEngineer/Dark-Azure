@@ -14,10 +14,12 @@ signal galaxy_ship_deselected(ship_obj)
 signal galaxy_ship_started_travel(ship_obj,)
 signal galaxy_ship_aborted_travel(ship_obj)
 
-enum STATES {
+enum SHIP_STATES {
 	IDLE,
 	MOVING
 }
+
+var _current_state = SHIP_STATES.IDLE
 
 func _ready():
 	pass
@@ -27,6 +29,10 @@ func _physics_process(delta):
 		if _destination as Vector2:
 			var new_pos = get_position() + move_to(_destination) * delta
 			set_position(new_pos)
+
+func _unhandled_input(event):
+	if event.is_action_pressed("right_mouse"):
+		set_start_travel(get_global_mouse_position())
 
 func set_galaxy_ref(g_ref):
 	"""
@@ -62,6 +68,14 @@ func set_signals_to_galaxy_geometrics():
 	else:
 		printerr(err_array.max())
 		return false
+
+func set_start_travel(destination):
+	#TO DO: function code
+	pass
+	
+
+func set_abort_travel():
+	pass
 
 func move_to(destination):
 	var distance_vector = destination - get_position()
