@@ -11,8 +11,8 @@ var _galaxy_geometrics_ref = null
 signal galaxy_ship_selected(ship_obj)
 signal galaxy_ship_deselected(ship_obj)
 
-signal galaxy_ship_started_travel(ship_obj,)
-signal galaxy_ship_aborted_travel(ship_obj)
+signal galaxy_ship_started_travel(galaxy_travel_obj)
+signal galaxy_ship_aborted_travel(galaxy_travel_obj)
 
 enum SHIP_STATES {
 	IDLE,
@@ -20,6 +20,8 @@ enum SHIP_STATES {
 }
 
 var _current_state = SHIP_STATES.IDLE
+
+var _current_travel
 
 func _ready():
 	pass
@@ -71,11 +73,17 @@ func set_signals_to_galaxy_geometrics():
 
 func set_start_travel(destination):
 	#TO DO: function code
-	pass
+	_current_state = SHIP_STATES.MOVING
+	var travel = GalaxyTravel.new(self, destination)
+	emit_signal("galaxy_ship_started_travel", travel)
+	_current_travel = travel
 	
 
 func set_abort_travel():
-	pass
+	_current_state = SHIP_STATES.IDLE
+	emit_signal("galaxy_ship_aborted_travel", _current_travel)
+	_current_travel = null 
+	
 
 func move_to(destination):
 	var distance_vector = destination - get_position()
