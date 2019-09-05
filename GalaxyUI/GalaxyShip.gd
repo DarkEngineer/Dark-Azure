@@ -1,7 +1,8 @@
 extends Area2D
 
 var _default_speed = 150
-var _destination = null
+
+const DEFAULT_TRAVEL_ABORT_DISTANCE = 5.0
 
 var _selected = false
 
@@ -21,20 +22,22 @@ enum SHIP_STATES {
 
 var _current_state = SHIP_STATES.IDLE
 
-var _current_travel
+var _current_travel: GalaxyTravel
 
 func _ready():
 	pass
 
 func _physics_process(delta):
-	if _destination != null:
-		if _destination as Vector2:
-			var new_pos = get_position() + move_to(_destination) * delta
-			set_position(new_pos)
+	if _current_state == SHIP_STATES.MOVING:
+		var travel_move_vector = create_travel_move_speed(_current_travel.get_destination(), 
+				delta)
+		set_position(get_position() + travel_move_vector * delta) 
+		check_abort_travel_distance()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("right_mouse"):
-		set_start_travel(get_global_mouse_position())
+		if _selected:
+			set_start_travel(get_global_mouse_position())
 
 func set_galaxy_ref(g_ref):
 	"""
@@ -71,28 +74,32 @@ func set_signals_to_galaxy_geometrics():
 		printerr(err_array.max())
 		return false
 
+#MOVEMENT Functions
+
 func set_start_travel(destination):
 	#TO DO: function code
 	_current_state = SHIP_STATES.MOVING
 	var travel = GalaxyTravel.new(self, destination)
 	emit_signal("galaxy_ship_started_travel", travel)
 	_current_travel = travel
-	
 
 func set_abort_travel():
 	_current_state = SHIP_STATES.IDLE
 	emit_signal("galaxy_ship_aborted_travel", _current_travel)
 	_current_travel = null 
-	
 
-func move_to(destination):
+func check_abort_travel_distance():
+	if (_current_travel.get_destination() - get_position()).length() <= DEFAULT_TRAVEL_ABORT_DISTANCE:
+		set_abort_travel() 
+
+func create_travel_move_speed(destination, delta):
 	var distance_vector = destination - get_position()
 	var distance_norm = distance_vector.normalized()
 	var speed_vector = distance_norm * _default_speed
-	rotate_to_travel_path(speed_vector)
+	rotate_to_travel_path(speed_vector, delta)
 	return speed_vector
 
-func rotate_to_travel_path(vector_norm: Vector2):
+func rotate_to_travel_path(vector_norm: Vector2, delta):
 	var t_rot = get_rotation()
 	var final_rotation = vector_norm.angle()
 	var diff_rotation = final_rotation - t_rot
