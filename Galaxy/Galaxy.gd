@@ -86,6 +86,8 @@ func create_galaxy_ship():
 	var g_ship = Galaxy_Ship.instance()
 	increase_galaxy_ship_count()
 	g_ship.set_name("Galaxy_Ship_%d" % [get_galaxy_ship_count()])
+	g_ship.set_galaxy_ref(self)
+	g_ship.set_galaxy_geometrics_ref(_galaxy_geometrics_ref)
 	add_child(g_ship)
 
 func get_selected():
@@ -116,7 +118,7 @@ func filter_selection_mode_object(obj, filtered_obj_array, selection_mode_groups
 			filtered_obj_array.append(obj)
 			break
 
-func filter_selection(selected_array: Array, current_selection_array: Array):
+func filter_selection(selected_array: Array, current_selection_array: Array) -> void:
 	var to_unselection = []
 	var duplicates = []
 	var new_selection = []
@@ -125,12 +127,15 @@ func filter_selection(selected_array: Array, current_selection_array: Array):
 			duplicates.append(new_obj)
 			selected_array.erase(new_obj)
 		else:
+			if new_obj.has_method("set_selected"):
+				new_obj.set_selected()
 			new_selection.append(new_obj)
+			
 	to_unselection = selected_array
 	for unselect_obj in to_unselection:
-		unselect_obj.set_deselected()
-	
-	print(new_selection)
+		if unselect_obj.has_method("set_deselected"):
+			unselect_obj.set_deselected()
+		_selected.erase(unselect_obj)
 
 func filter_object_selection(obj_array, selection_mode):
 	return filter_by_selection_mode(obj_array, selection_mode)

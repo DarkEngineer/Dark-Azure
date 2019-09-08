@@ -129,7 +129,7 @@ func set_selection_mode():
 	set if selection is for single object or multiple to choose proper filters
 	"""
 	if abs(get_details().width) <= 5.0 and abs(get_details().height) <= 5.0:
-		_selection_mode = global.SELECTION_MODE.SINGLE	
+		_selection_mode = global.SELECTION_MODE.SINGLE
 	else:
 		_selection_mode = global.SELECTION_MODE.MULTIPLE
 

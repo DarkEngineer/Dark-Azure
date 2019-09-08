@@ -1,7 +1,8 @@
 extends Area2D
 
 var _default_speed = 150
-var _destination = null
+
+const DEFAULT_TRAVEL_ABORT_DISTANCE = 5.0
 
 var _selected = false
 
@@ -11,17 +12,32 @@ var _galaxy_geometrics_ref = null
 signal galaxy_ship_selected(ship_obj)
 signal galaxy_ship_deselected(ship_obj)
 
-signal galaxy_ship_started_travel(ship_obj)
-signal galaxy_ship_aborted_travel(ship_obj)
+signal galaxy_ship_started_travel(galaxy_travel_obj)
+signal galaxy_ship_aborted_travel(galaxy_travel_obj)
+
+enum SHIP_STATES {
+	IDLE,
+	MOVING
+}
+
+var _current_state = SHIP_STATES.IDLE
+
+var _current_travel: GalaxyTravel
 
 func _ready():
 	pass
 
 func _physics_process(delta):
-	if _destination != null:
-		if _destination as Vector2:
-			var new_pos = get_position() + move_to(_destination) * delta
-			set_position(new_pos)
+	if _current_state == SHIP_STATES.MOVING:
+		var travel_move_vector = create_travel_move_speed(_current_travel.get_destination(), 
+				delta)
+		set_position(get_position() + travel_move_vector * delta) 
+		check_abort_travel_distance()
+
+func _unhandled_input(event):
+	if event.is_action_pressed("right_mouse"):
+		if _selected:
+			set_start_travel(get_global_mouse_position())
 
 func set_galaxy_ref(g_ref):
 	"""
@@ -35,7 +51,7 @@ func set_galaxy_geometrics_ref(g_geo_ref):
 	Set reference to galaxy geometrics object
 	"""
 	_galaxy_geometrics_ref = g_geo_ref
-	
+	set_signals_to_galaxy_geometrics()
 
 func set_signals_to_galaxy():
 	var err_array = []
@@ -58,14 +74,38 @@ func set_signals_to_galaxy_geometrics():
 		printerr(err_array.max())
 		return false
 
-func move_to(destination):
+#MOVEMENT Functions
+
+func set_start_travel(destination):
+	#Check if during galaxy travel
+	check_if_currently_travelling()
+	
+	_current_state = SHIP_STATES.MOVING
+	var travel = GalaxyTravel.new(self, destination)
+	emit_signal("galaxy_ship_started_travel", travel)
+	_current_travel = travel
+
+func set_abort_travel():
+	_current_state = SHIP_STATES.IDLE
+	emit_signal("galaxy_ship_aborted_travel", _current_travel)
+	_current_travel = null 
+
+func check_abort_travel_distance():
+	if (_current_travel.get_destination() - get_position()).length() <= DEFAULT_TRAVEL_ABORT_DISTANCE:
+		set_abort_travel() 
+
+func check_if_currently_travelling():
+	if _current_state == SHIP_STATES.MOVING and _current_travel != null:
+		set_abort_travel()
+
+func create_travel_move_speed(destination, delta):
 	var distance_vector = destination - get_position()
 	var distance_norm = distance_vector.normalized()
 	var speed_vector = distance_norm * _default_speed
-	rotate_to_travel_path(speed_vector)
+	rotate_to_travel_path(speed_vector, delta)
 	return speed_vector
 
-func rotate_to_travel_path(vector_norm: Vector2):
+func rotate_to_travel_path(vector_norm: Vector2, delta):
 	var t_rot = get_rotation()
 	var final_rotation = vector_norm.angle()
 	var diff_rotation = final_rotation - t_rot
@@ -89,3 +129,9 @@ func set_deselected():
 	
 	emit_signal("galaxy_ship_deselected", self)
 	check_select()
+
+func set_start_galaxy_travel(galaxy_travel: GalaxyTravel):
+	emit_signal("galaxy_ship_started_travel", galaxy_travel)
+
+func set_aborted_galaxy_travel(galaxy_travel: GalaxyTravel):
+	emit_signal("galaxy_ship_aborted_travel", galaxy_travel)
