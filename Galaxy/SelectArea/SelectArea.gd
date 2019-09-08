@@ -28,7 +28,7 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("left_mouse"):
 		on_action_press()
-	if event.is_action_released("left_mouse"):
+	elif event.is_action_released("left_mouse"):
 		on_action_release()
 
 func _process(delta):

@@ -20,8 +20,10 @@ func _on_galaxy_ship_aborted_travel(galaxy_travel):
 
 func draw_travel_path(travel_path: GalaxyTravel):
 	var obj_pos = travel_path.get_object().get_position()
-	var dest_pos = travel_path.get_destination()
-	draw_line(dest_pos, obj_pos, _line_color, _line_width, true)
+	var dest = travel_path.get_destination()
+	if dest as Vector2:
+		draw_line(dest, obj_pos, _line_color, _line_width, true)
+	
 
 func refresh_travel_paths():
 	update()

@@ -130,6 +130,8 @@ func set_deselected():
 	emit_signal("galaxy_ship_deselected", self)
 	check_select()
 
+#MOVEMENT Signals
+
 func set_start_galaxy_travel(galaxy_travel: GalaxyTravel):
 	emit_signal("galaxy_ship_started_travel", galaxy_travel)
 
