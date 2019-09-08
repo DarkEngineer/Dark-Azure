@@ -77,7 +77,9 @@ func set_signals_to_galaxy_geometrics():
 #MOVEMENT Functions
 
 func set_start_travel(destination):
-	#TO DO: function code
+	#Check if during galaxy travel
+	check_if_currently_travelling()
+	
 	_current_state = SHIP_STATES.MOVING
 	var travel = GalaxyTravel.new(self, destination)
 	emit_signal("galaxy_ship_started_travel", travel)
@@ -91,6 +93,10 @@ func set_abort_travel():
 func check_abort_travel_distance():
 	if (_current_travel.get_destination() - get_position()).length() <= DEFAULT_TRAVEL_ABORT_DISTANCE:
 		set_abort_travel() 
+
+func check_if_currently_travelling():
+	if _current_state == SHIP_STATES.MOVING and _current_travel != null:
+		set_abort_travel()
 
 func create_travel_move_speed(destination, delta):
 	var distance_vector = destination - get_position()
