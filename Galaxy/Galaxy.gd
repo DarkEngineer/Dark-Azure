@@ -5,6 +5,7 @@ var Galaxy_Geometrics = preload("res://Galaxy/GalaxyGeometrics/GalaxyGeometrics.
 var Galaxy_UI = preload("res://GalaxyUI/GalaxyUI.tscn")
 var Galaxy_Ship = preload("res://GalaxyUI/GalaxyShip.tscn")
 var Select_Area = preload("res://Galaxy/SelectArea/SelectArea.tscn")
+var Target_Area = preload("res://Galaxy/TargetArea/TargetArea.tscn")
 
 const DEFAULT_STARS_AMOUNT = 200
 const DEFAULT_RANGE: float = 15000.0
@@ -99,6 +100,11 @@ func create_selection_area_object():
 	s_area.connect("objects_selected", self, "_on_objects_selected")
 	add_child(s_area)
 
+func create_target_area_object():
+	var target_area = Target_Area.instance()
+	target_area.set_name("TargetArea")
+	target_area.connect("objects_targeted", self, "_on_objects_target_chosen")
+
 func filter_by_selection_mode(obj_array, selection_mode) -> Array:
 	var filtered_objects = []
 	var single_groups: Array = global.get_select_filter().single
@@ -149,3 +155,6 @@ func _on_galaxy_ship_selected(ship):
 
 func _on_galaxy_ship_deselected(ship):
 	_selected.erase(ship)
+
+func _on_objects_target_chosen(obj_array):
+	pass
