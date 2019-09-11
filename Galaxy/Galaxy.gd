@@ -26,6 +26,7 @@ func _ready():
 	create_galaxy_ui()
 	create_galaxy_ship()
 	create_selection_area_object()
+	create_target_area_object()
 
 func set_star_id():
 	var star_id = _next_star_id
@@ -104,6 +105,7 @@ func create_target_area_object():
 	var target_area = Target_Area.instance()
 	target_area.set_name("TargetArea")
 	target_area.connect("objects_targeted", self, "_on_objects_target_chosen")
+	add_child(target_area)
 
 func filter_by_selection_mode(obj_array, selection_mode) -> Array:
 	var filtered_objects = []

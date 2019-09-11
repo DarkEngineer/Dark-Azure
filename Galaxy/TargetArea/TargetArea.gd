@@ -17,9 +17,11 @@ func _input(event):
 		end_detect_target()
 
 func start_detect_target():
+	set_monitorable(true)
 	set_area_position(get_global_mouse_position())
 
 func end_detect_target():
+	show()
 	_timer.start()
 
 func set_area_position(pos: Vector2):
@@ -33,4 +35,5 @@ func _on_GetTargetTimer_timeout():
 	var objects = get_current_mouse_target()
 	print(objects)
 	emit_signal("objects_targeted", objects)
+	set_monitorable(false)
 	hide()
