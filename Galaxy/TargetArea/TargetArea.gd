@@ -33,7 +33,6 @@ func get_current_mouse_target() -> Array:
 
 func _on_GetTargetTimer_timeout():
 	var objects = get_current_mouse_target()
-	print(objects)
 	emit_signal("objects_targeted", objects)
 	set_monitorable(false)
 	hide()

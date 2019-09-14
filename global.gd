@@ -13,6 +13,14 @@ var _galaxy_select_filter = {
 	"multiple": ["Galaxy Ships"]
 }
 
+#Game to UI signals###################
+signal target_mouse_selected(obj_array)
+######################################
+#UI to Game signals###################
+signal objects_moved_to_target(target)
+######################################
+
+
 func _ready():
 	pass
 

@@ -148,6 +148,11 @@ func filter_selection(selected_array: Array, current_selection_array: Array) -> 
 func filter_object_selection(obj_array, selection_mode):
 	return filter_by_selection_mode(obj_array, selection_mode)
 
+func _on_objects_moved_to_target(target):
+	for s_obj in _selected:
+		s_obj.set_start_travel(target.get_position())
+
+
 func _on_objects_selected(obj_array, selection_mode):
 	var filtered_obj_array = filter_object_selection(obj_array, selection_mode)
 	filter_selection(get_selected(), filtered_obj_array)
@@ -158,5 +163,11 @@ func _on_galaxy_ship_selected(ship):
 func _on_galaxy_ship_deselected(ship):
 	_selected.erase(ship)
 
-func _on_objects_target_chosen(obj_array):
-	pass
+func _on_objects_target_chosen(obj_array: Array):
+	if not _selected.empty():
+		var target_object
+		if obj_array.empty():
+			target_object = null
+		elif obj_array.size() == 1:
+			target_object = obj_array.front()
+		global.emit_signal("target_mouse_selected", target_object)
