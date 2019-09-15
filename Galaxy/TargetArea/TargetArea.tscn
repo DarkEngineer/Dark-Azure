@@ -5,6 +5,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="TargetArea" type="Area2D"]
+input_pickable = false
 monitorable = false
 script = ExtResource( 1 )
 

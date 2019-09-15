@@ -25,10 +25,10 @@ signal objects_selected(obj_array, selection_mode)
 func _ready():
 	hide()
 
-func _input(event):
+func _unhandled_input(event):
 	if event.is_action_pressed("left_mouse"):
 		on_action_press()
-	elif event.is_action_released("left_mouse"):
+	if event.is_action_released("left_mouse"):
 		on_action_release()
 
 func _process(delta):

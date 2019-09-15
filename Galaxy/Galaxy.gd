@@ -27,6 +27,7 @@ func _ready():
 	create_galaxy_ship()
 	create_selection_area_object()
 	create_target_area_object()
+	connect_ui_signals()
 
 func set_star_id():
 	var star_id = _next_star_id
@@ -107,6 +108,9 @@ func create_target_area_object():
 	target_area.connect("objects_targeted", self, "_on_objects_target_chosen")
 	add_child(target_area)
 
+func connect_ui_signals():
+	global.connect("objects_moved_to_target", self, "_on_objects_moved_to_target")
+
 func filter_by_selection_mode(obj_array, selection_mode) -> Array:
 	var filtered_objects = []
 	var single_groups: Array = global.get_select_filter().single
@@ -148,10 +152,10 @@ func filter_selection(selected_array: Array, current_selection_array: Array) -> 
 func filter_object_selection(obj_array, selection_mode):
 	return filter_by_selection_mode(obj_array, selection_mode)
 
+
 func _on_objects_moved_to_target(target):
 	for s_obj in _selected:
-		s_obj.set_start_travel(target.get_position())
-
+		s_obj.set_start_travel(target)
 
 func _on_objects_selected(obj_array, selection_mode):
 	var filtered_obj_array = filter_object_selection(obj_array, selection_mode)
@@ -167,7 +171,7 @@ func _on_objects_target_chosen(obj_array: Array):
 	if not _selected.empty():
 		var target_object
 		if obj_array.empty():
-			target_object = null
+			target_object = get_global_mouse_position()
 		elif obj_array.size() == 1:
 			target_object = obj_array.front()
 		global.emit_signal("target_mouse_selected", target_object)

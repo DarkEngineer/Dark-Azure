@@ -26,13 +26,20 @@ func filter_menu_options(target, command_menu):
 		add_command_option("Travel to", 1, target.get_name())
 
 func default_menu_options():
-	add_command_option("Travel Here")
+	add_command_option("Travel Here", 1)
 
 func add_command_option(command: String, command_id: int = -1, target_name: String = ""):
 	if not target_name.empty():
-		_c_menu.add_item("%s %s" % [command, target_name])
+		_c_menu.add_item("%s %s" % [command, target_name], command_id)
 	else:
-		_c_menu.add_item("%s" % [command])
+		_c_menu.add_item("%s" % [command], command_id)
+
+func get_target_position() -> Vector2:
+	if _target is Node:
+		return _target.get_position()
+	elif _target is Vector2:
+		return _target
+	return Vector2(0, 0)
 
 func clear_target():
 	_target = null
@@ -40,7 +47,8 @@ func clear_target():
 func _on_CommandMenu_id_pressed(ID):
 	match ID:
 		1:
-			global.emit_signal("objects_to_target_moved", _target)
+			global.emit_signal("objects_moved_to_target", get_target_position())
+			
 		_:
 			pass
 	clear_target()
