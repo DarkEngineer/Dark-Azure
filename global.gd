@@ -20,6 +20,10 @@ signal target_mouse_selected(obj_array)
 signal objects_moved_to_target(target)
 ######################################
 
+#Change scene signals#################
+signal galaxy_star_picked(galaxy_star)
+signal galaxy_map_picked()
+######################################
 
 func _ready():
 	pass

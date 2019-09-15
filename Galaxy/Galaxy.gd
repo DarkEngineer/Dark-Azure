@@ -1,13 +1,14 @@
 extends Node2D
 
 var Galaxy_Star = preload("res://Galaxy/GalaxyStar/GalaxyStar.tscn")
+var Star_System = preload("res://Galaxy/StarSystem/StarSystem.tscn")
 var Galaxy_Geometrics = preload("res://Galaxy/GalaxyGeometrics/GalaxyGeometrics.tscn")
 var Galaxy_UI = preload("res://GalaxyUI/GalaxyUI.tscn")
 var Galaxy_Ship = preload("res://GalaxyUI/GalaxyShip.tscn")
 var Select_Area = preload("res://Galaxy/SelectArea/SelectArea.tscn")
 var Target_Area = preload("res://Galaxy/TargetArea/TargetArea.tscn")
 
-const DEFAULT_STARS_AMOUNT = 200
+const DEFAULT_STARS_AMOUNT = 10
 const DEFAULT_RANGE: float = 15000.0
 const DEFAULT_DISTANCE_BETWEEN_STARS: float = 450.0
 
@@ -28,6 +29,8 @@ func _ready():
 	create_selection_area_object()
 	create_target_area_object()
 	connect_ui_signals()
+	
+	generate_star_systems()
 
 func set_star_id():
 	var star_id = _next_star_id
@@ -35,7 +38,6 @@ func set_star_id():
 	return star_id
 
 func create_galaxy():
-	var stars_created = 0
 	for i in range(DEFAULT_STARS_AMOUNT):
 		var star = Galaxy_Star.instance()
 		var if_far_enough = false
@@ -50,9 +52,9 @@ func create_galaxy():
 			if if_far_enough:
 				var new_id = set_star_id()
 				star.set_position(Vector2(new_x, new_y))
-				star.set_name("star_%d" % [new_id])
+				star.set_name("Galaxy_Star_%d" % [new_id])
 				star.set_id(new_id)
-				add_child(star)
+				$GalaxyStars.add_child(star)
 
 func check_star_distance_from_others(new_position: Vector2, 
 		distance_between_stars: float = DEFAULT_DISTANCE_BETWEEN_STARS):
@@ -91,7 +93,7 @@ func create_galaxy_ship():
 	g_ship.set_name("Galaxy_Ship_%d" % [get_galaxy_ship_count()])
 	g_ship.set_galaxy_ref(self)
 	g_ship.set_galaxy_geometrics_ref(_galaxy_geometrics_ref)
-	add_child(g_ship)
+	$GalaxyShips.add_child(g_ship)
 
 func get_selected():
 	return _selected.duplicate()
@@ -110,6 +112,23 @@ func create_target_area_object():
 
 func connect_ui_signals():
 	global.connect("objects_moved_to_target", self, "_on_objects_moved_to_target")
+
+#Star System functions###############
+func generate_star_systems():
+	var galaxy_stars = get_tree().get_nodes_in_group("Galaxy Stars")
+	for star in galaxy_stars:
+		var star_system = Star_System.instance()
+		assign_system_to_star(star_system, star)
+		$StarSystems.add_child(star_system)
+
+func assign_system_to_star(star_system, galaxy_star):
+	var star_id = galaxy_star.get_id()
+	star_system.set_name("StarSystem_%d" % [star_id])
+	galaxy_star.set_star_system(star_system)
+
+func star_system_view(galaxy_star):
+	pass
+######################################
 
 func filter_by_selection_mode(obj_array, selection_mode) -> Array:
 	var filtered_objects = []
