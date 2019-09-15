@@ -34,11 +34,6 @@ func _physics_process(delta):
 		set_position(get_position() + travel_move_vector * delta) 
 		check_abort_travel_distance()
 
-func _unhandled_input(event):
-	if event.is_action_pressed("right_mouse"):
-		if _selected:
-			set_start_travel(get_global_mouse_position())
-
 func set_galaxy_ref(g_ref):
 	"""
 	Set reference to galaxy object
@@ -129,6 +124,8 @@ func set_deselected():
 	
 	emit_signal("galaxy_ship_deselected", self)
 	check_select()
+
+#MOVEMENT Signals
 
 func set_start_galaxy_travel(galaxy_travel: GalaxyTravel):
 	emit_signal("galaxy_ship_started_travel", galaxy_travel)

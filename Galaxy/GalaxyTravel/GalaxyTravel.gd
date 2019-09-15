@@ -6,9 +6,9 @@ Contains information about galaxy travel
 """
 
 var _obj: Object setget , get_object
-var _destination: Vector2
+var _destination
 
-func _init(obj: Object, dest: Vector2):
+func _init(obj: Object, dest):
 	_obj = obj
 	_destination = dest
 

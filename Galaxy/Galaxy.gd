@@ -5,6 +5,7 @@ var Galaxy_Geometrics = preload("res://Galaxy/GalaxyGeometrics/GalaxyGeometrics.
 var Galaxy_UI = preload("res://GalaxyUI/GalaxyUI.tscn")
 var Galaxy_Ship = preload("res://GalaxyUI/GalaxyShip.tscn")
 var Select_Area = preload("res://Galaxy/SelectArea/SelectArea.tscn")
+var Target_Area = preload("res://Galaxy/TargetArea/TargetArea.tscn")
 
 const DEFAULT_STARS_AMOUNT = 200
 const DEFAULT_RANGE: float = 15000.0
@@ -25,6 +26,8 @@ func _ready():
 	create_galaxy_ui()
 	create_galaxy_ship()
 	create_selection_area_object()
+	create_target_area_object()
+	connect_ui_signals()
 
 func set_star_id():
 	var star_id = _next_star_id
@@ -99,6 +102,15 @@ func create_selection_area_object():
 	s_area.connect("objects_selected", self, "_on_objects_selected")
 	add_child(s_area)
 
+func create_target_area_object():
+	var target_area = Target_Area.instance()
+	target_area.set_name("TargetArea")
+	target_area.connect("objects_targeted", self, "_on_objects_target_chosen")
+	add_child(target_area)
+
+func connect_ui_signals():
+	global.connect("objects_moved_to_target", self, "_on_objects_moved_to_target")
+
 func filter_by_selection_mode(obj_array, selection_mode) -> Array:
 	var filtered_objects = []
 	var single_groups: Array = global.get_select_filter().single
@@ -140,6 +152,11 @@ func filter_selection(selected_array: Array, current_selection_array: Array) -> 
 func filter_object_selection(obj_array, selection_mode):
 	return filter_by_selection_mode(obj_array, selection_mode)
 
+
+func _on_objects_moved_to_target(target):
+	for s_obj in _selected:
+		s_obj.set_start_travel(target)
+
 func _on_objects_selected(obj_array, selection_mode):
 	var filtered_obj_array = filter_object_selection(obj_array, selection_mode)
 	filter_selection(get_selected(), filtered_obj_array)
@@ -149,3 +166,12 @@ func _on_galaxy_ship_selected(ship):
 
 func _on_galaxy_ship_deselected(ship):
 	_selected.erase(ship)
+
+func _on_objects_target_chosen(obj_array: Array):
+	if not _selected.empty():
+		var target_object
+		if obj_array.empty():
+			target_object = get_global_mouse_position()
+		elif obj_array.size() == 1:
+			target_object = obj_array.front()
+		global.emit_signal("target_mouse_selected", target_object)

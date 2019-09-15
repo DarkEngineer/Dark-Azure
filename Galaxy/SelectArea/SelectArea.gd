@@ -23,9 +23,9 @@ var _selection_mode: int = global.SELECTION_MODE.NONE
 signal objects_selected(obj_array, selection_mode)
 
 func _ready():
-	pass
+	hide()
 
-func _input(event):
+func _unhandled_input(event):
 	if event.is_action_pressed("left_mouse"):
 		on_action_press()
 	if event.is_action_released("left_mouse"):
@@ -41,6 +41,7 @@ func _process(delta):
 		set_length_properties(length_data.width, length_data.height)
 
 func on_action_press():
+	set_monitorable(true)
 	if not _select_started:
 		_start_mouse_position = get_global_mouse_position()
 		_select_started = true
@@ -139,4 +140,5 @@ func reset_selection_mode():
 func _on_OverlappingResponseTimer_timeout():
 	emit_signal("objects_selected", get_overlapping_areas(), _selection_mode)
 	reset_selection_mode()
+	set_monitorable(false)
 	hide()
