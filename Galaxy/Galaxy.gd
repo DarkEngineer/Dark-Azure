@@ -8,8 +8,8 @@ var Galaxy_Ship = preload("res://GalaxyUI/GalaxyShip.tscn")
 var Select_Area = preload("res://Galaxy/SelectArea/SelectArea.tscn")
 var Target_Area = preload("res://Galaxy/TargetArea/TargetArea.tscn")
 
-const DEFAULT_STARS_AMOUNT = 10
-const DEFAULT_RANGE: float = 15000.0
+const DEFAULT_STARS_AMOUNT = 200
+const DEFAULT_RANGE: float = 30000.0
 const DEFAULT_DISTANCE_BETWEEN_STARS: float = 450.0
 
 var _next_star_id: int = 1
@@ -31,6 +31,8 @@ func _ready():
 	connect_ui_signals()
 	
 	generate_star_systems()
+	
+	set_star_system_signals()
 
 func set_star_id():
 	var star_id = _next_star_id
@@ -126,8 +128,11 @@ func assign_system_to_star(star_system, galaxy_star):
 	star_system.set_name("StarSystem_%d" % [star_id])
 	galaxy_star.set_star_system(star_system)
 
-func star_system_view(galaxy_star):
-	pass
+func set_star_system_signals():
+	global.connect("galaxy_star_picked", self, "_star_system_view")
+
+func _star_system_view(galaxy_star):
+	print("show star")
 ######################################
 
 func filter_by_selection_mode(obj_array, selection_mode) -> Array:
