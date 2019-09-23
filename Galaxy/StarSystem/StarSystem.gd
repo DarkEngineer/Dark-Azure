@@ -4,7 +4,7 @@ var Asteroid = preload("res://Galaxy/Asteroid/Asteroid.tscn")
 
 func _ready():
 	randomize()
-	create_asteroid_belt(1500, 150)
+	#create_asteroid_belt(1500, 150)
 	hide()
 
 func create_asteroid_belt(distance_from_center: float, belt_width: float):

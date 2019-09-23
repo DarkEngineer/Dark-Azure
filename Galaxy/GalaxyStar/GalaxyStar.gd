@@ -36,3 +36,10 @@ func _on_GalaxyStar_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("left_mouse"):
 		global.emit_signal("galaxy_star_picked", self)
 		_mouse_inside = false
+
+
+func _on_GalaxyStar_visibility_changed():
+	if is_visible_in_tree():
+		show()
+	else:
+		hide()
