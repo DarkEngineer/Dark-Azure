@@ -1,6 +1,5 @@
 extends Area2D
 
-onready var _shape = $CollisionShape
 onready var _timer = $GetTargetTimer
 
 signal objects_targeted(target_array)
