@@ -15,14 +15,23 @@ func _ready():
 	connect_signals()
 
 func connect_signals():
+# warning-ignore:return_value_discarded
 	global.connect("star_system_selected", self, "_on_star_system_view")
+# warning-ignore:return_value_discarded
+	global.connect("galaxy_view_selected", self, "_on_galaxy_view")
 
 func _on_star_system_view(star_node):
 	$GalaxyStars.hide()
 	$StarSystem.show()
 
+func _on_galaxy_view(star_node):
+	$GalaxyStars.show()
+	$StarSystem.hide()
+
 #galaxy creation function
+####################################################
 func generate_eliptic_galaxy():
+# warning-ignore:unused_variable
 	for i in range(STAR_COUNT):
 		
 		var new_angle = rand_range(0, 2 * PI)
@@ -42,4 +51,7 @@ func get_next_star_id():
 	var star_id = _next_star_id
 	_next_star_id += 1
 	return star_id
+
+func assign_system_to_node():
+	pass
 #################################

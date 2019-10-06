@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Object",
+"class": "Star_System",
+"language": "GDScript",
+"path": "res://Star_System_Object/StarSystemObject.gd"
+} ]
 _global_script_class_icons={
-
+"Star_System": ""
 }
 
 [application]
