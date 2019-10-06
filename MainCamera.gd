@@ -26,7 +26,3 @@ func zoom_at_point(zoom_change, point):
 	c1 = c0 + (-0.5 * v0 + point)*(z0 - z1)
 	zoom = z1
 	global_position = c1
-
-func set_to_global_var():
-	#global._main_camera_current_zoom = get_zoom().length()
-	pass

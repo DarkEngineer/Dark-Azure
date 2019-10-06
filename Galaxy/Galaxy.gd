@@ -10,16 +10,36 @@ var _next_star_id = 1
 
 func _ready():
 	randomize()
+	generate_eliptic_galaxy()
+	
+	connect_signals()
+
+func connect_signals():
+	global.connect("star_system_selected", self, "_on_star_system_view")
+
+func _on_star_system_view(star_node):
+	$GalaxyStars.hide()
+	$StarSystem.show()
 
 #galaxy creation function
-func create_eliptic_galaxy():
-	var new_angle = rand_range(0, 2 * PI)
-	var new_distance = randf() * GALAXY_RADIUS
-	
-	var new_pos = Vector2(cos(new_angle) * new_distance, sin(new_angle) * new_distance)
-	create_star_node(_next_star_id, new_pos)
+func generate_eliptic_galaxy():
+	for i in range(STAR_COUNT):
+		
+		var new_angle = rand_range(0, 2 * PI)
+		var new_distance = randf() * GALAXY_RADIUS
+		
+		var new_pos = Vector2(cos(new_angle) * new_distance, sin(new_angle) * new_distance)
+		
+		$GalaxyStars.add_child(create_star_node(get_next_star_id(), new_pos))
 
-func create_star_node(star_id: int, new_position):
+func create_star_node(star_id: int, new_position: Vector2) -> Node2D:
 	var t_star = Star_Node.instance()
-	t_star.set_name("StarNode_%d" % [star_id]) 
+	t_star.set_name("StarNode_%d" % [star_id])
+	t_star.set_position(new_position)
+	return t_star
+
+func get_next_star_id():
+	var star_id = _next_star_id
+	_next_star_id += 1
+	return star_id
 #################################
