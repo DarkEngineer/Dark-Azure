@@ -9,25 +9,13 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "SpaceObject",
-"class": "Asteroid",
+"base": "Object",
+"class": "Market_Agent",
 "language": "GDScript",
-"path": "res://Star_System/Asteroid.gd"
-}, {
-"base": "Area2D",
-"class": "SpaceObject",
-"language": "GDScript",
-"path": "res://Space_Object/SpaceObject.gd"
-}, {
-"base": "SpaceObject",
-"class": "Star",
-"language": "GDScript",
-"path": "res://Star_System/Star.gd"
+"path": "res://Economy/MarketAgent.gd"
 } ]
 _global_script_class_icons={
-"Asteroid": "",
-"SpaceObject": "",
-"Star": ""
+"Market_Agent": ""
 }
 
 [application]

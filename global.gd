@@ -3,8 +3,7 @@ extends Node
 
 # Signals from Game to UI
 ########################
-signal mouse_asteroid_focused(asteroid)
-signal mouse_asteroid_focus_lost()
+signal market_commodity_query(com_list_data)
 ########################
 # Signals from UI to Game
 
@@ -12,3 +11,4 @@ signal mouse_asteroid_focus_lost()
 
 func _ready():
 	randomize()
+
