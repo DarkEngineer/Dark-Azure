@@ -8,14 +8,9 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Object",
-"class": "Market_Agent",
-"language": "GDScript",
-"path": "res://Economy/MarketAgent.gd"
-} ]
+_global_script_classes=[  ]
 _global_script_class_icons={
-"Market_Agent": ""
+
 }
 
 [application]
@@ -26,7 +21,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-global="*res://global.gd"
+global="*res://src/Autoload/global.gd"
+Steering="*res://src/Autoload/Steering.gd"
 
 [input]
 
