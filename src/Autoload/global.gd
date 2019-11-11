@@ -1,10 +1,9 @@
 extends Node
 
-
 # warning-ignore:unused_signal
-signal camp_ui_update_requested()
+signal changed_to_star_system(system_data)
 # warning-ignore:unused_signal
-signal camp_ui_update_sent(camp_data)
+signal changed_to_galaxy_map(system_data) 
 
 func _ready():
 	randomize()
