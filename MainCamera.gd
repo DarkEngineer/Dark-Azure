@@ -14,7 +14,6 @@ func _input(event):
 			elif event.button_index == BUTTON_WHEEL_DOWN:
 				zoom_at_point(1 / zoom_step,mouse_position)
 			
-			#set_to_global_var()
 
 func zoom_at_point(zoom_change, point):
 	var c0 = global_position # camera position
