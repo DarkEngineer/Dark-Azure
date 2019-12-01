@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Interface/Surface/SurfaceMap.tres" type="TileSet" id=1]
+
+[node name="SurfaceMap" type="TileMap"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 109, 94 )
+cell_half_offset = 0
+format = 1
+__meta__ = {
+"_edit_horizontal_guides_": [  ],
+"_edit_vertical_guides_": [  ]
+}
