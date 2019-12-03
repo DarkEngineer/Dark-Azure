@@ -1,6 +1,6 @@
 extends Node2D
 
-var StaticObject = preload("res://src/Objects/StaticObject/StaticObject.tscn")
+var SpaceObject = preload("res://src/Objects/SpaceObject/SpaceObject.tscn")
 
 func _ready():
 	_create_static_object()
@@ -11,7 +11,7 @@ func _create_static_object():
 	
 	var final_coord = Vector2(cos(rand_angle) * rand_radius, sin(rand_angle) * rand_radius)
 	
-	var static_object = StaticObject.instance()
+	var static_object = SpaceObject.instance()
 	static_object.set_name("static_object_1")
 	static_object.set_position(final_coord)
 	

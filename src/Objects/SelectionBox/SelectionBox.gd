@@ -36,5 +36,5 @@ func set_shape_size(m_pos):
 
 
 func _on_Timer_timeout():
-	print(get_overlapping_bodies())
-	hide()
+	SelectionManager.filter_objects(get_overlapping_bodies())
+	
