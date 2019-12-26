@@ -12,10 +12,14 @@ script = ExtResource( 1 )
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="Interface" parent="UILayer" instance=ExtResource( 4 )]
+visible = false
 mouse_filter = 2
 
 [node name="MainCamera" parent="." instance=ExtResource( 2 )]
 
 [node name="SelectionBox" parent="." instance=ExtResource( 5 )]
+
+[node name="TargetBox" parent="." instance=ExtResource( 5 )]
+_box_type = 1
 
 [node name="StarSystem" parent="." instance=ExtResource( 3 )]

@@ -24,6 +24,8 @@ config/icon="res://icon.png"
 global="*res://src/Autoload/global.gd"
 Steering="*res://src/Autoload/Steering.gd"
 SelectionManager="*res://src/Autoload/SelectionManager.gd"
+CommandMenuManager="*res://src/Autoload/CommandMenuManager.gd"
+TargetManager="*res://src/Autoload/TargetManager.gd"
 
 [input]
 
