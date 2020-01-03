@@ -5,8 +5,9 @@ var _planet_trail_array: PoolVector2Array setget set_trail, get_trail
 var _next_trail_point_index: int = 0
 var _current_trail_point_index: int = 0
 
+
 func _ready():
-	pass
+	generate_minerals()
 
 func set_position_on_trail(trail):
 	var rand_trail_index = randi() % trail.size()

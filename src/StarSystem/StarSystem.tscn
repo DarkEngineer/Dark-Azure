@@ -13,4 +13,4 @@ script = ExtResource( 1 )
 [node name="SpaceObjects" type="Node2D" parent="."]
 
 [node name="SpaceObject" parent="SpaceObjects" instance=ExtResource( 2 )]
-position = Vector2( 231.927, 94.2684 )
+collision_layer = 2

@@ -19,6 +19,13 @@ config/name="Dark Azure"
 run/main_scene="res://src/World/World.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+SelectManager="*res://src/Autoload/SelectManager.gd"
+global="*res://src/Autoload/global.gd"
+InterfaceManager="*res://src/Autoload/InterfaceManager.gd"
+Steering="*res://src/Autoload/Steering.gd"
+
 [input]
 
 left_mouse={

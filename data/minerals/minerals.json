@@ -1,0 +1,16 @@
+{
+	"mineral_rarity_list":
+		[
+			{"id": 1, "name": "normal"},
+			{"id": 2, "name": "rare"},
+			{"id": 3, "name": "legendary"},
+			{"id": 4, "name": "unique"}
+		],
+		
+	"mineral_list":
+		[
+			{"id": 1, "name": "coal", "rarity": 1},
+			{"id": 2, "name": "iron_ore", "rarity": 1},
+			{"id": 3, "name": "wood", "rarity": 1}
+		]
+}

@@ -3,11 +3,11 @@ extends Node2D
 var PlanetBody = preload("res://src/PlanetBody/PlanetBody.tscn")
 
 var _next_trail_id = 1
+var _next_system_planet_id = 1
 
 func _ready():
 	for i in range(1000, 10000, 1000):
 		add_planet(create_planet_trail(i))
-	
 
 func create_planet_trail(radius = 50.0):
 	var line = Line2D.new()
@@ -36,9 +36,13 @@ func create_planet_trail(radius = 50.0):
 
 func add_planet(celestial_trail):
 	var planet = PlanetBody.instance()
-	planet.set_name("planet_")
+	planet.set_name("planet_%d" % [_next_system_planet_id])
+	planet._name = "Object %d" % [_next_system_planet_id]
+	
 	procedural_planet_placement(planet, celestial_trail)
+	
 	$CelestialBodies.add_child(planet)
+	_next_system_planet_id += 1
 
 func procedural_planet_placement(planet, planet_trail: PoolVector2Array): 
 	planet.set_position_on_trail(planet_trail)
