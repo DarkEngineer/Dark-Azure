@@ -31,5 +31,5 @@ func _input(event):
 	"""
 
 func start_system_jump(target_pos):
-	$SystemJump.initialize(target_pos)
+	$SystemJump.set_jump_target(target_pos)
 	_change_state("system_jump")

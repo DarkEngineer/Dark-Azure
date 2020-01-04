@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
-var _velocity_vector = Vector2.ZERO
+
+var _acceleration = 50.0
+var _speed = 0.0
+var _velocity = Vector2.ZERO
 
 func _ready():
 	pass
@@ -15,3 +18,6 @@ func select():
 func unselect():
 	$Select.hide()
 
+func reset_velocity():
+	_speed = 0
+	_velocity = Vector2.ZERO
