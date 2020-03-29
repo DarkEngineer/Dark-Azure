@@ -1,0 +1,27 @@
+{
+	"colors": [
+		{"light_greenish_blue": "#55efc4"},
+		{"faded_poster": "#81ecec"},
+		{"green_darner_tail": "#74b9ff"},
+		{"shy_moment": "#a29bfe"},
+		{"city_lights": "#dfe6e9"},
+		
+		{"mint_leaf": "#00b894"},
+		{"robins_egg_blue": "#00cec9"},
+		{"electron_blue": "#0984e3"},
+		{"exodus_fruit": "#6c5ce7"},
+		{"soothing_breeze": "#b2bec3"},
+		
+		{"sour_lemon": "#ffeaa7"},
+		{"first_date": "#fab1a0"},
+		{"pink_glamour": "#ff7675"},
+		{"pico-8_pink": "#fd79a8"},
+		{"american_river": "#636e72"},
+		
+		{"bright_yarrow": "#fdcb6e"},
+		{"orangeville": "#e17055"},
+		{"chi-chong": "#d63031"},
+		{"prunus_avium": "#e84393"},
+		{"dracula_orchid": "#2d3436"}
+	]
+}
